@@ -1,0 +1,6739 @@
+/* Theme preview tokens (requested palette) */
+:root {
+    --theme-bg: #FAFAFA;
+    --theme-surface: #FFFFFF;
+    --theme-surface-alt: #F5F5F5;
+    --theme-border: #ECECEC;
+    --theme-border-strong: #D3D3D4;
+    --theme-text: #222222;
+    --theme-text-soft: #333333;
+    --theme-text-muted: #777777;
+    --theme-brand: #2E7D32;
+    --theme-brand-hover: #1B5E20;
+    --theme-brand-active: #388E3C;
+    --theme-on-brand: #FFFFFF;
+    --theme-brand-muted: #E8F5E9;
+    --theme-brand-muted-strong: #C8E6C9;
+    --theme-brand-surface: #F1F8F4;
+    --theme-brand-border: rgba(46, 125, 50, 0.35);
+    --theme-brand-shadow: rgba(46, 125, 50, 0.18);
+    --theme-brand-focus: rgba(46, 125, 50, 0.45);
+    --sidebar-scrollbar-width: 3px;
+
+    /* Sidebar open / close / compact — keep shell motion in sync (was ~0.3s and felt abrupt) */
+    --sidebar-layout-duration: 0.35s;
+    --sidebar-layout-easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Inventory / store filters — neutral black–white–gray chrome; brand only for focus ring */
+.inventory-filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--theme-text-muted);
+}
+
+.inventory-filter-control {
+    box-sizing: border-box;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid var(--theme-border-strong);
+    background: var(--theme-surface);
+    color: var(--theme-text);
+    font-size: 12px;
+    line-height: 1.2;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.inventory-filter-control:hover {
+    border-color: #bdbdbd;
+}
+
+.inventory-filter-control:focus {
+    border-color: var(--theme-brand);
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.22);
+}
+
+.inventory-filter-control:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: var(--theme-surface-alt);
+}
+
+/* Mobile Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity var(--sidebar-layout-duration) var(--sidebar-layout-easing);
+}
+
+.sidebar-overlay.visible {
+    opacity: 1;
+}
+
+/* Sidebar Base - Webuzo Dark Style */
+.medicore-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--theme-surface-alt);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition:
+        transform var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+        width var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+        box-shadow calc(var(--sidebar-layout-duration) * 0.85) ease;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Compact Mode */
+.medicore-sidebar.compact-mode {
+    width: 70px;
+}
+
+.medicore-sidebar.compact-mode .logo-text,
+.medicore-sidebar.compact-mode .animated-subtitle,
+.medicore-sidebar.compact-mode .search-wrapper,
+.medicore-sidebar.compact-mode .user-info,
+.medicore-sidebar.compact-mode .premium-badge,
+.medicore-sidebar.compact-mode .nav-text,
+.medicore-sidebar.compact-mode .nav-arrow {
+    display: none;
+}
+
+.medicore-sidebar.compact-mode .nav-link {
+    justify-content: center;
+    padding: 12px;
+}
+
+.medicore-sidebar.compact-mode .nav-icon {
+    margin-right: 0;
+}
+
+/* Advanced Settings in Compact Mode */
+.medicore-sidebar.compact-mode .settings-button {
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.medicore-sidebar.compact-mode .settings-button .MuiIconButton-root {
+    color: rgba(255, 255, 255, 0.7);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+}
+
+.medicore-sidebar.compact-mode .settings-button .MuiIconButton-root:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.medicore-sidebar.compact-mode .settings-button .settings-active {
+    background: rgba(46, 125, 50, 0.15);
+    color: var(--theme-brand);
+}
+
+/* Header Settings Icon in Compact Mode */
+.header-settings-icon {
+    display: none;
+}
+
+.main-header.compact-mode .header-settings-icon {
+    display: flex;
+    margin-right: 16px;
+}
+
+.main-header.compact-mode .header-settings-icon .MuiIconButton-root {
+    color: var(--theme-text);
+}
+
+.main-header.compact-mode .header-settings-icon .settings-active {
+    color: var(--theme-brand);
+    background: rgba(22, 119, 255, 0.1);
+}
+
+.main-header.compact-mode .header-settings-icon .MuiIconButton-root:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Header Actions in Compact Mode */
+.medicore-sidebar.compact-mode .header-actions {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.medicore-sidebar.compact-mode .header-actions .MuiIconButton-root {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    width: 28px;
+    height: 28px;
+}
+
+.medicore-sidebar.compact-mode .header-actions .MuiIconButton-root:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.medicore-sidebar.compact-mode .header-actions .MuiSvgIcon-root {
+    font-size: 16px;
+}
+
+/* Settings Button Highlight */
+.medicore-sidebar.compact-mode .settings-active {
+    background: rgba(46, 125, 50, 0.2) !important;
+    border: 1px solid rgba(46, 125, 50, 0.3);
+}
+
+.medicore-sidebar.compact-mode .settings-active .MuiSvgIcon-root {
+    color: #1677FF !important;
+}
+
+/* Hidden State */
+.medicore-sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Header Section */
+.sidebar-header {
+    padding: 16px;
+    background: var(--theme-surface-alt);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+
+
+.header-content {
+    display: flex;
+    align-items: flex-start; /* Align to top */
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: flex-start; /* Align to top */
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-brand);
+    flex-shrink: 0;
+    box-shadow: none;
+}
+
+.logo-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+    padding-top: 2px; /* Align with icon */
+}
+
+.logo-text h6 {
+    color: var(--theme-on-brand);
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* Animated Subtitle */
+.animated-subtitle {
+    position: relative;
+    height: 16px;
+    overflow: hidden;
+    width: 140px;
+}
+
+.subtitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ffffff;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.subtitle.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.header-actions {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+    padding-top: 2px; /* Align with logo */
+}
+
+.header-actions .MuiIconButton-root {
+    padding: 6px;
+    color: #ffffff;
+}
+
+.header-actions .MuiIconButton-root .MuiSvgIcon-root {
+    width: 18px;
+    height: 18px;
+    color: #ffffff;
+}
+
+.header-actions .MuiIconButton-root:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Refresh Sidebar Button */
+.refresh-sidebar {
+    transition: all 0.3s ease !important;
+}
+
+.refresh-sidebar:hover {
+    transform: rotate(90deg) scale(1.1) !important;
+    background-color: rgba(76, 175, 80, 0.2) !important;
+}
+
+.refresh-sidebar:hover .MuiSvgIcon-root {
+    color: rgba(76, 175, 80, 0.9) !important;
+}
+
+/* Search Section */
+.search-section {
+    padding: 12px 16px;
+    margin: 0;
+    background: var(--theme-surface-alt);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-wrapper {
+    background: #ffffff;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 40px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.search-wrapper:focus-within {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.search-icon {
+    color: #999999;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.search-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.search-input {
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0 12px;
+    width: 100%;
+    height: 100%;
+}
+
+.search-input::placeholder {
+    color: #999999;
+    font-weight: 400;
+}
+
+.search-input:focus {
+    outline: none;
+    color: #ffffff !important;
+}
+
+.search-clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    color: #999999;
+    transition: all 0.2s ease;
+}
+
+.search-clear-btn:hover {
+    color: #666666;
+}
+
+.sidebar-mode-switch {
+    margin-top: 10px;
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 18px;
+    background: #e2e8f0;
+    border: 1px solid #cbd5e1;
+    width: 100%;
+}
+
+.sidebar-mode-option {
+    flex: 1;
+    border: 0;
+    border-radius: 14px;
+    padding: 8px 10px;
+    background: transparent;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.sidebar-mode-option.active {
+    background: #ffffff;
+    color: #222222;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.sidebar-mode-option:hover {
+    color: #222222;
+}
+
+.medicore-sidebar.compact-mode .search-section {
+    display: none !important;
+}
+
+.medicore-sidebar.compact-mode .nav-menu {
+    padding: 8px 6px !important;
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiListItemButton-root {
+    justify-content: center !important;
+    min-height: 42px !important;
+    padding: 8px !important;
+    border-radius: 10px !important;
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiListItemIcon-root {
+    min-width: 0 !important;
+    margin: 0 !important;
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiCollapse-root {
+    display: none !important;
+}
+
+.medicore-sidebar.compact-mode .sidebar-mode-switch {
+    display: none !important;
+}
+
+.medicore-sidebar.compact-mode .sidebar-mode-option {
+    padding: 7px 0;
+    font-size: 11px;
+}
+
+/* Hide scrollbar arrow buttons (Windows classic arrows) */
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-button,
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-button:single-button,
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-button:vertical:start:decrement,
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-button:vertical:end:increment {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.compact-expand-control {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.expand-sidebar-btn {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+    border: 1px solid #dbe2ea !important;
+    background: #ffffff !important;
+    color: #475569 !important;
+}
+
+.expand-sidebar-btn:hover {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+/* User Profile Section */
+.user-profile {
+    margin: 12px 16px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-profile:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-on-brand);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.user-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.user-info .MuiTypography-subtitle1 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info .MuiTypography-caption {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    display: block;
+    line-height: 1.2;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.status-indicator {
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    height: calc(100vh - 200px);
+    scroll-behavior: smooth;
+    will-change: scroll-position;
+    background: rgb(34, 41, 80);
+}
+
+.nav-menu::-webkit-scrollbar {
+    width: var(--sidebar-scrollbar-width, 3px);
+}
+
+.nav-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.nav-menu::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.nav-menu::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Compact Mode Adjustments */
+.medicore-sidebar.compact-mode .nav-menu {
+    padding: 4px 8px;
+    height: calc(100vh - 160px); /* Adjust for compact mode's smaller header + footer */
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiListItemText-primary {
+    display: none; /* Hide text in compact mode */
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiListItemButton-root {
+    justify-content: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    min-width: 48px;
+}
+
+.medicore-sidebar.compact-mode .nav-menu .MuiListItemIcon-root {
+    min-width: auto;
+    margin-right: 0;
+}
+
+/* Permission-Based Sidebar Integration */
+.nav-menu .MuiList-root {
+    padding: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Override Material-UI Typography sizes in sidebar */
+.nav-menu .MuiTypography-subtitle2 {
+    font-size: 0.75rem !important;
+    line-height: 1.2 !important;
+}
+
+.nav-menu .MuiTypography-body2 {
+    font-size: inherit !important;
+    line-height: 1.2 !important;
+}
+
+/* Reduce icon sizes in sidebar */
+.nav-menu .MuiListItemIcon-root {
+    min-width: 32px !important;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+}
+
+.nav-menu .MuiListItemButton-root:hover .MuiListItemIcon-root {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.nav-menu .MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: var(--theme-brand);
+}
+
+.nav-menu .MuiListItemIcon-root .MuiSvgIcon-root {
+    font-size: 14px !important;
+}
+
+.nav-menu .MuiListItemIcon-root i {
+    font-size: 16px !important;
+}
+
+.nav-menu .MuiListItem-root {
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+.nav-menu .MuiListItemButton-root {
+    border-radius: 0;
+    margin: 0;
+    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.85);
+    transition: all 0.2s ease;
+    font-weight: 400;
+    border-left: 3px solid transparent;
+}
+
+.nav-menu .MuiListItemButton-root:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.nav-menu .MuiListItemButton-root.Mui-selected {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border-left: 3px solid #4CAF50;
+    font-weight: 500;
+}
+
+
+.nav-menu .MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: var(--theme-brand);
+}
+
+.nav-menu .MuiListItemIcon-root {
+    min-width: 32px;
+    color: inherit;
+}
+
+.nav-menu .MuiListItemText-primary {
+    font-size: 1rem;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.nav-menu .MuiListItemText-root {
+    margin: 0;
+    min-width: 0; /* Allow text to shrink */
+    flex: 1;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+.nav-menu .MuiChip-root {
+    display: none; /* Hide all count chips/badges */
+}
+
+/* Light Theme Adjustments for Permission Sidebar */
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root.Mui-selected {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 1);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root.Mui-selected > .MuiListItemIcon-root {
+    background: transparent;
+    color: var(--theme-brand);
+    box-shadow: none;
+}
+
+/* Light Theme - Icon Colors */
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root > .MuiListItemIcon-root {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 0;
+    width: 32px !important;
+    height: auto;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px !important;
+    box-shadow: none;
+    transition: all 0.2s ease;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root:hover > .MuiListItemIcon-root {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.95);
+    box-shadow: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .group-has-active > .MuiListItemIcon-root {
+    background: transparent;
+    color: var(--theme-brand);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .group-has-active {
+    background: transparent;
+}
+
+/* Light Theme - Beautiful Parent-Child Connectors */
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root {
+    background: transparent;
+    border: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root::before {
+    display: none; /* Remove connectors for Webuzo style */
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    margin-left: 0;
+    padding-left: 32px;
+    border-radius: 0;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root::before {
+    display: none; /* Remove decorative elements */
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--theme-brand);
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateX(0);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root:hover::before {
+    display: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected {
+    background: rgba(255, 255, 255, 0.12);
+    border-left-color: var(--theme-brand);
+    color: #ffffff;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected::before {
+    display: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root[aria-expanded="true"] {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiChip-root {
+    display: none; /* Hide all count chips/badges in light theme too */
+}
+
+/* Loading and Error States */
+.nav-menu .MuiSkeleton-root {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 4px 0;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiSkeleton-root {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.nav-menu .MuiAlert-root {
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.nav-menu .MuiAlert-standardError {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.nav-menu .MuiAlert-standardWarning {
+    background: rgba(46, 125, 50, 0.08);
+    color: var(--theme-brand);
+    border: 1px solid rgba(46, 125, 50, 0.2);
+}
+
+/* Smooth transitions for all interactive elements */
+.nav-menu * {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.nav-menu .MuiListItemButton-root:focus-visible {
+    outline: 2px solid #1677FF;
+    outline-offset: 2px;
+}
+
+/* Beautiful Parent-Child Connectors and Backgrounds */
+.nav-menu .MuiCollapse-root {
+    position: relative;
+    background: var(--theme-surface-alt);
+    border-radius: 0 0 12px 12px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+/* Connector line for expanded groups */
+.nav-menu .MuiCollapse-root::before {
+    content: '';
+    position: absolute;
+    left: 12px; /* Align exactly with the border position (matches child margin-left) */
+    top: 0;
+    bottom: 0;
+    width: 3px; /* Match border width */
+    background: linear-gradient(to bottom,
+        rgba(22, 119, 255, 0.6) 0%,
+        rgba(22, 119, 255, 0.3) 50%,
+        rgba(22, 119, 255, 0.1) 100%);
+    border-radius: 1px;
+    z-index: 1;
+}
+
+/* Child item styling - Webuzo style (flat with dashes) */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 32px;
+    padding-right: 16px;
+    background: transparent;
+    border-radius: 0;
+    border-left: 3px solid transparent;
+    position: relative;
+    transition: all 0.2s ease;
+    transform: translateX(0);
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+/* Hide icons in child items - Webuzo doesn't show icons for submenu items */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root .MuiListItemIcon-root {
+    display: none !important;
+}
+
+/* enforce very small glyph for child icons */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root .MuiListItemIcon-root > .MuiSvgIcon-root,
+.nav-menu .MuiCollapse-root .MuiListItemButton-root .MuiListItemIcon-root > i {
+    font-size: 10px !important;
+    line-height: 1 !important;
+}
+
+/* Child item text styling */
+.nav-menu .MuiCollapse-root .MuiListItemText-primary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: inherit !important;
+    font-weight: 500;
+}
+
+/* Ensure child item typography respects inline styles */
+.nav-menu .MuiCollapse-root .MuiTypography-body2 {
+    font-size: inherit !important;
+}
+.sidebar-child-item {
+    font-size: 11.5px !important;
+}
+/* Connector dots for child items - DISABLED */
+/* .nav-menu .MuiCollapse-root .MuiListItemButton-root::before {
+    content: '';
+    position: absolute;
+    left: -16.5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #d0d0d0;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 2;
+} */
+
+/* Enhanced hover effects for child items */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:hover {
+    background: rgba(46, 125, 50, 0.08);
+    border-left-color: rgba(46, 125, 50, 0.5);
+    /* Remove the transform to prevent misalignment */
+    transform: translateX(0);
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:hover::before {
+    background: #4ECF70;
+    transform: translateY(-50%) scale(1.2);
+    /* Keep dot in same position (adjusted for compact child margin) */
+    left: -12.5px;
+}
+
+/* Selected child item styling */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected {
+    background: #1F2547 !important;
+    border-left-color: #4ECF70!important;
+    color: #ffffff !important;
+    font-weight: 600;
+    /* Ensure no transform on selected state */
+    transform: translateX(0);
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected::before {
+    background: #4ECF70;
+    transform: translateY(-50%) scale(1.5);
+    /* Keep dot aligned */
+    left: -12.5px;
+}
+
+/* Parent group styling when expanded */
+.nav-menu .MuiListItemButton-root[aria-expanded="true"] {
+    background: rgba(102, 126, 234, 0.08);
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+/* Beautiful expand/collapse animations */
+.nav-menu .MuiCollapse-root .MuiCollapse-wrapper {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-menu .MuiCollapse-root .MuiCollapse-wrapperInner {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Staggered animation effect for child items */
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.nav-menu .MuiCollapse-root .MuiListItemButton-root:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+/* Subtle glow effect for the connector line */
+.nav-menu .MuiCollapse-root::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom,
+        rgba(76, 175, 80, 0.1) 0%,
+        rgba(76, 175, 80, 0.05) 50%,
+        transparent 100%);
+    border-radius: 2px;
+    filter: blur(1px);
+}
+
+/* Enhanced parent group hover when collapsed */
+.nav-menu .MuiListItemButton-root[aria-expanded="false"]:hover {
+    background: rgba(76, 175, 80, 0.06);
+    transform: translateX(2px);
+}
+
+/* Smooth transitions for all elements */
+.nav-menu .MuiListItemButton-root,
+.nav-menu .MuiCollapse-root,
+.nav-menu .MuiListItemIcon-root,
+.nav-menu .MuiListItemText-root {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide all count indicators, badges, and numbers */
+.nav-menu .MuiBadge-root .MuiBadge-badge,
+.nav-menu .count-indicator,
+.nav-menu .item-count,
+.nav-menu .menu-count,
+.nav-menu [class*="count"],
+.nav-menu [class*="badge"],
+.nav-menu .MuiTypography-caption {
+    display: none !important;
+}
+
+/* Nav Item Container */
+.nav-item {
+    position: relative;
+    margin: 6px 0;
+}
+
+/* Nav Link */
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: var(--theme-text);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+    gap: 10px;
+    margin: 4px 4px;
+    border: 1px solid transparent;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--theme-text);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--theme-on-brand);
+    box-shadow: 0 4px 14px rgba(46, 125, 50, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+/* Sidebar Icon Container Size - Easy Override */
+.sidebar-icon-container {
+    font-size: 200px !important;
+    min-width: 323px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon {
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    position: relative;
+    z-index: 1;
+    color: var(--theme-brand);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.nav-link:hover .nav-icon {
+    opacity: 1;
+    color: var(--theme-brand);
+    transform: scale(1.08);
+}
+
+.nav-link.active .nav-icon {
+    opacity: 1;
+    color: var(--theme-on-brand);
+    transform: scale(1.1);
+}
+
+.nav-text {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: visible;
+    line-height: 1.3;
+    min-width: 0;
+    color: var(--theme-text);
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover .nav-text {
+    color: var(--theme-text);
+    font-weight: 600;
+}
+
+.nav-link.active .nav-text {
+    color: var(--theme-on-brand);
+    font-weight: 700;
+}
+
+/* Nav Badge */
+.nav-badge {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 9px;
+    background: #ff6b6b;
+    color: var(--theme-on-brand);
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    border: 2px solid #fff;
+}
+
+/* Compact Mode Badge */
+.medicore-sidebar.compact-mode .nav-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    margin-left: 0;
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.65rem;
+    padding: 0 4px;
+}
+
+/* Hover Menu Badge */
+.hover-menu-item .nav-badge {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 0;
+}
+
+.hover-menu-item:hover .nav-badge {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--theme-on-brand);
+}
+
+.hover-menu-item.active .nav-badge {
+    background: rgba(102, 126, 234, 0.2);
+    color: var(--theme-brand);
+}
+
+.nav-arrow {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+/* Enhanced Dropdown Styles */
+.nav-dropdown {
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease-in-out;
+    margin: 0;
+    position: relative;
+    opacity: 0;
+}
+
+.nav-dropdown.expanded {
+    max-height: 500px;
+    margin: 4px 0;
+    opacity: 1;
+}
+
+
+.nav-dropdown::before {
+    content: '';
+    position: absolute;
+    left: 22px; 
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.subnav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 8px 8px 32px;
+    margin: 2px 4px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.subnav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--theme-on-brand);
+}
+
+.subnav-item.active {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--theme-brand);
+}
+
+
+.subnav-item::before {
+    content: '';
+    position: absolute;
+    left: 21px; 
+    top: 50%;
+    width: 1px;
+    height: 1px;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+/* Dot indicator */
+.subnav-item::after {
+    content: '';
+    position: absolute;
+    left: 18px; /* Aligns with nav icon center */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+}
+
+.subnav-item:hover::after {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.subnav-item.active::after {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.subnav-text {
+    font-size: 0.7rem;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: visible;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Arrow Rotation */
+.nav-link.expanded .nav-arrow {
+    transform: rotate(90deg);
+}
+
+/* Active States */
+.nav-item.active > .nav-link {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--theme-on-brand);
+}
+
+.nav-item.active > .nav-link .nav-icon,
+.nav-item.active > .nav-link .nav-arrow {
+    opacity: 1;
+    color: var(--theme-on-brand);
+}
+
+/* Parent highlight when child is active */
+.nav-item.has-active-child > .nav-link {
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--theme-brand);
+}
+
+/* Footer Section - Fixed */
+.sidebar-footer {
+    padding: 16px;
+    background: var(--theme-surface-alt);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+}
+
+/* Bottom Actions */
+.bottom-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.bottom-actions:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+
+    border-radius: 14px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(102, 126, 234, 0.25);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.12);
+}
+
+.bottom-actions:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.16) 0%, rgba(118, 75, 162, 0.09) 100%);
+    border-color: rgba(102, 126, 234, 0.35);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.18);
+    transform: translateY(-2px);
+}
+
+.action-button {
+    color: #ffffff !important;
+    padding: 10px 12px !important;
+    border-radius: 10px !important;
+    transition: all 0.2s ease !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-weight: 600 !important;
+}
+
+.action-button span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.action-button:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateX(2px) !important;
+}
+
+.action-button:hover span {
+    color: #ffffff;
+}
+
+/* Action Button Badge */
+.action-button-badge {
+    position: absolute !important;
+    top: -4px !important;
+    right: -4px !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    border-radius: 9px !important;
+    background: #ff6b6b !important;
+    color: white !important;
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 6px !important;
+    border: 2px solid #1a1d21 !important;
+}
+
+/* Updates Menu */
+.updates-menu {
+    background: #1E2024 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 8px !important;
+    min-width: 220px !important;
+}
+
+.updates-menu .MuiMenuItem-root {
+    padding: 12px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 0.9rem !important;
+}
+
+.updates-menu .MuiMenuItem-root:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.updates-menu .MuiMenuItem-root .MuiSvgIcon-root {
+    font-size: 20px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.updates-menu .menu-badge {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Progress Circle */
+.progress-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-button-wrapper {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Compact Mode Adjustments */
+.medicore-sidebar.compact-mode .bottom-actions {
+    padding: 8px;
+    justify-content: center;
+}
+
+.medicore-sidebar.compact-mode .action-button span {
+    display: none;
+}
+
+.medicore-sidebar.compact-mode .action-button {
+    padding: 6px !important;
+}
+
+/* Settings Button */
+.settings-button { display: none !important; }
+
+/* Search Bar — scoped so login/other pages keep readable input text */
+.medicore-sidebar .MuiInputBase-root,
+.main-header .MuiInputBase-root {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    padding: 8px 12px !important;
+}
+
+.medicore-sidebar .MuiInputBase-input,
+.main-header .MuiInputBase-input {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.9rem !important;
+    padding: 6px 12px !important;
+}
+
+.medicore-sidebar .MuiInputBase-input::placeholder,
+.main-header .MuiInputBase-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+}
+
+/* Status Indicator */
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* User Info */
+.user-info {
+    margin-right: 20px;
+}
+
+.user-info .MuiTypography-subtitle1 {
+    color: var(--theme-on-brand);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.user-info .MuiTypography-caption {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+/* Main Header */
+/* Enhanced Main Header - Mobile App Style */
+.main-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 220px;
+    height: 70px;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fbfd 100%);
+    border-bottom: 1px solid #e8ecf1;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    transition:
+        left var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+        box-shadow 0.35s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.main-header.enhanced {
+    height: 75px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.main-header.sidebar-hidden {
+    left: 0;
+}
+
+.main-header.compact-mode {
+    left: 70px;
+}
+
+.main-header.compact-mode.sidebar-hidden {
+    left: 0;
+}
+
+/* Enhanced Header Sections */
+.header-left-section {
+    display: flex;
+    align-items: center;
+    /* gap: 12px; */
+    flex: 1;
+    max-width: calc(100% - 250px);
+    overflow: hidden;
+}
+
+.header-center-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.header-right-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    justify-content: space-between;
+    /* min-width: 200px; */
+}
+
+/* Enhanced Breadcrumb */
+.header-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 10px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.5);
+    min-height: 48px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.header-breadcrumb:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.breadcrumb-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.page-title {
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.breadcrumb-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.page-subtitle {
+    font-size: 0.75rem !important;
+    color: #6c757d !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+}
+
+.breadcrumb-separator {
+    color: #6c757d;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.page-location {
+    font-size: 0.75rem !important;
+    color: #4CAF50 !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+}
+
+/* Enhanced Search Container */
+.header-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    padding: 8px 16px;
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.header-search-container:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+    transform: translateY(-1px);
+}
+
+.header-search-container.focused {
+    border-color: #667eea;
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 1);
+}
+
+.header-search-container .search-icon {
+    color: #6c757d;
+    margin-right: 12px;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.header-search-container.focused .search-icon {
+    color: var(--theme-brand);
+}
+
+.header-search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+    padding: 0;
+}
+
+.header-search-input::placeholder {
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+.search-clear {
+    color: #6c757d !important;
+    padding: 4px !important;
+}
+
+.search-clear:hover {
+    background: rgba(108, 117, 125, 0.1) !important;
+}
+
+/* Time Display removed - styles preserved in case needed later */
+.header-time-display { display: none !important; }
+
+/* Quick Actions */
+.header-quick-actions .header-action-btn {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #dee2e6;
+    color: #495057;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-quick-actions .header-action-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Enhanced Header Icon Buttons */
+.header-icon-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #e9ecef;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.header-icon-button:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.header-icon-button.messages:hover {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-color: #28a745;
+}
+
+.header-icon-button.notifications:hover {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border-color: #dc3545;
+}
+
+/* Enhanced User Profile */
+.header-profile.enhanced {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #e9ecef;
+    backdrop-filter: blur(10px);
+}
+
+.header-profile.enhanced:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: #667eea;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.2);
+}
+
+.header-profile.enhanced .header-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-on-brand);
+    font-size: 0.9rem;
+    font-weight: 600;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.avatar-status-indicator {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background: #28a745;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
+}
+
+.header-profile.enhanced .user-name {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+    line-height: 1.2 !important;
+}
+
+.header-profile.enhanced .user-role {
+    font-size: 0.75rem !important;
+    color: #667eea !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2 !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.header-profile.enhanced .dropdown-arrow {
+    color: #6c757d;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.header-profile.enhanced:hover .dropdown-arrow {
+    transform: rotate(180deg);
+    color: var(--theme-brand);
+}
+
+/* ===== THEME-RESPONSIVE HEADER STYLES ===== */
+
+/* Dark Theme Header (Default) - Mobile App Professional */
+.main-header.enhanced.dark-theme {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+.main-header.enhanced.dark-theme .page-title {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.main-header.enhanced.dark-theme .page-subtitle {
+    color: rgba(255, 255, 255, 0.68) !important;
+    font-size: 0.85rem;
+}
+
+.main-header.enhanced.dark-theme .header-search-container {
+    background: rgba(102, 126, 234, 0.08);
+    border: 1.5px solid rgba(102, 126, 234, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+}
+
+.main-header.enhanced.dark-theme .header-search-container:hover {
+    border-color: #667eea;
+    box-shadow: 0 6px 24px rgba(102, 126, 234, 0.2);
+    background: rgba(102, 126, 234, 0.12);
+}
+
+.main-header.enhanced.dark-theme .header-search-container.focused {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.15);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+}
+
+.main-header.enhanced.dark-theme .header-search-input {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    font-weight: 500;
+}
+
+.main-header.enhanced.dark-theme .header-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.main-header.enhanced.dark-theme .search-icon {
+    color: rgba(102, 126, 234, 0.8);
+}
+
+.main-header.enhanced.dark-theme .header-search-container.focused .search-icon {
+    color: var(--theme-brand);
+}
+
+.main-header.enhanced.dark-theme .header-time-display {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+
+.main-header.enhanced.dark-theme .header-icon-button {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.dark-theme .header-icon-button:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+.main-header.enhanced.dark-theme .header-profile.enhanced {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 12px;
+    padding: 8px 12px;
+}
+
+.main-header.enhanced.dark-theme .header-profile.enhanced:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #667eea;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+}
+
+.main-header.enhanced.dark-theme .user-name {
+    color: white !important;
+    font-weight: 600;
+}
+
+.main-header.enhanced.dark-theme .user-role {
+    color: #667eea !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.main-header.enhanced.dark-theme .dropdown-arrow {
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.dark-theme .header-profile.enhanced:hover .dropdown-arrow {
+    color: var(--theme-brand);
+    transform: rotate(180deg);
+}
+
+/* Light Theme Header - Mobile App Professional */
+.main-header.enhanced.light-theme {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.main-header.enhanced.light-theme .page-title {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.main-header.enhanced.light-theme .page-subtitle {
+    color: #64748b !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.main-header.enhanced.light-theme .page-location {
+    color: #667eea !important;
+    font-weight: 600;
+}
+
+.main-header.enhanced.light-theme .header-search-container {
+    background: rgba(241, 245, 249, 0.8);
+    border: 1.5px solid rgba(226, 232, 240, 0.8);
+    border-radius: 12px;
+}
+
+.main-header.enhanced.light-theme .header-search-container:hover {
+    border-color: rgba(203, 213, 225, 0.9);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background: rgba(248, 250, 252, 1);
+}
+
+.main-header.enhanced.light-theme .header-search-container.focused {
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 6px 24px rgba(102, 126, 234, 0.15);
+}
+
+.main-header.enhanced.light-theme .header-search-input {
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    font-weight: 500;
+}
+
+.main-header.enhanced.light-theme .header-search-input::placeholder {
+    color: rgba(45, 55, 72, 0.6) !important;
+    -webkit-text-fill-color: rgba(45, 55, 72, 0.6) !important;
+}
+
+.main-header.enhanced.light-theme .search-icon {
+    color: #64748b;
+}
+
+.main-header.enhanced.light-theme .header-search-container.focused .search-icon {
+    color: var(--theme-brand);
+}
+
+.main-header.enhanced.light-theme .header-time-display {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 600;
+    color: var(--theme-on-brand);
+}
+
+.main-header.enhanced.light-theme .header-icon-button {
+    background: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    color: #64748b;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.light-theme .header-icon-button:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced {
+    background: rgba(248, 250, 252, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 12px;
+    padding: 8px 12px;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(203, 213, 225, 0.9);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.main-header.enhanced.light-theme .user-name {
+    color: #1e293b !important;
+    font-weight: 600;
+}
+
+.main-header.enhanced.light-theme .user-role {
+    color: #64748b !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.main-header.enhanced.light-theme .dropdown-arrow {
+    color: #64748b;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced:hover .dropdown-arrow {
+    color: var(--theme-brand);
+    transform: rotate(180deg);
+}
+
+/* Quick Actions Theme Styles */
+.main-header.enhanced.dark-theme .header-quick-actions .header-action-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.dark-theme .header-quick-actions .header-action-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+.main-header.enhanced.light-theme .header-quick-actions .header-action-btn {
+    background: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    color: #64748b;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.light-theme .header-quick-actions .header-action-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: var(--theme-on-brand);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Menu Trigger Theme Styles */
+.main-header.enhanced.dark-theme .menu-trigger {
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.dark-theme .menu-trigger:hover {
+    background: rgba(102, 126, 234, 0.15);
+    color: var(--theme-brand);
+}
+
+.main-header.enhanced.light-theme .menu-trigger {
+    color: #64748b;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-header.enhanced.light-theme .menu-trigger:hover {
+    background: rgba(241, 245, 249, 0.8);
+    color: var(--theme-brand);
+}
+
+/* Avatar Theme Styles - Mobile App */
+.main-header.enhanced.dark-theme .header-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.main-header.enhanced.light-theme .header-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25) !important;
+    border: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+/* Badge Theme Styles */
+.main-header.enhanced.dark-theme .header-icon-button.messages:hover {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-color: #28a745;
+}
+
+.main-header.enhanced.dark-theme .header-icon-button.notifications:hover {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border-color: #dc3545;
+}
+
+.main-header.enhanced.light-theme .header-icon-button.messages:hover {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-color: #28a745;
+}
+
+.main-header.enhanced.light-theme .header-icon-button.notifications:hover {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    border-color: #dc3545;
+}
+
+/* Clear Button Theme Styles */
+.main-header.enhanced.dark-theme .search-clear {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.main-header.enhanced.dark-theme .search-clear:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.main-header.enhanced.light-theme .search-clear {
+    color: #667eea !important;
+}
+
+.main-header.enhanced.light-theme .search-clear:hover {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #764ba2 !important;
+}
+
+/* ===== ENHANCED SEARCH NAVIGATION STYLES ===== */
+
+/* Search Results Dropdown - Sidebar */
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+.search-results-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 8px 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover,
+.search-result-item.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--theme-on-brand);
+}
+
+.search-result-item:hover .search-result-group,
+.search-result-item.selected .search-result-group {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.search-result-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-right: 12px;
+    color: var(--theme-brand);
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.search-result-item:hover .search-result-icon,
+.search-result-item.selected .search-result-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--theme-on-brand);
+}
+
+.search-result-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-result-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    color: #2c3e50;
+    transition: color 0.2s ease;
+}
+
+.search-result-item:hover .search-result-title,
+.search-result-item.selected .search-result-title {
+    color: var(--theme-on-brand);
+}
+
+.search-result-group {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: capitalize;
+    transition: color 0.2s ease;
+}
+
+.search-result-arrow {
+    color: #6c757d;
+    font-size: 12px;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.2s ease;
+}
+
+.search-result-item:hover .search-result-arrow,
+.search-result-item.selected .search-result-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--theme-on-brand);
+}
+
+/* Header Search Results Dropdown */
+.header-search-results-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+
+/* Dark Theme Search Results */
+.main-header.enhanced.dark-theme .header-search-results-dropdown {
+    background: #2c3e50;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.main-header.enhanced.dark-theme .search-results-header {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-header.enhanced.dark-theme .search-result-title {
+    color: var(--theme-on-brand);
+}
+
+.main-header.enhanced.dark-theme .search-result-group {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.main-header.enhanced.dark-theme .search-result-icon {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--theme-brand);
+}
+
+.main-header.enhanced.dark-theme .search-result-arrow {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.main-header.enhanced.dark-theme .search-no-results {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.header-search-results-dropdown .search-results-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 12px 12px 0 0;
+}
+
+.header-search-results-dropdown .search-result-item {
+    padding: 14px 18px;
+}
+
+.header-search-results-dropdown .search-result-item:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+/* Search Input Enhancements */
+.search-wrapper {
+    position: relative;
+}
+
+.search-clear-sidebar {
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-results-dropdown,
+    .header-search-results-dropdown {
+        max-height: 300px;
+    }
+
+    .search-result-item {
+        padding: 10px 12px;
+    }
+
+    .search-result-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+    }
+}
+
+/* Search Highlighting */
+.search-highlight {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* Loading State */
+.search-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #6c757d;
+}
+
+/* No Results State */
+.search-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #6c757d;
+    text-align: center;
+}
+
+.search-no-results i {
+    font-size: 32px;
+    margin-bottom: 8px;
+    opacity: 0.5;
+}
+
+.menu-trigger {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--theme-text);
+    transition: all 0.2s ease;
+    margin-right: 16px;
+}
+
+.menu-trigger:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+}
+
+.page-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--theme-text);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-icon-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-icon-button:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-profile:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-text);
+    font-size: 0.9rem;
+}
+
+.header-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+}
+
+.header-user-info .MuiTypography-subtitle2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--theme-text);
+    line-height: 1.2;
+}
+
+.header-user-info .MuiTypography-caption {
+    font-size: 0.75rem;
+    color: var(--theme-text);
+    line-height: 1.2;
+}
+
+/* Enhanced header user info styles */
+.header-profile.enhanced .header-user-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+}
+
+.header-profile.enhanced .header-user-info .user-name {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.header-profile.enhanced .header-user-info .user-role {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Enhanced Main Content Area - Always Light Background */
+.main-content {
+    margin-left: 220px;
+    margin-top: 75px;
+    /* padding: 32px; */
+    min-height: calc(100vh - 75px);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition:
+        margin-left var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+        width var(--sidebar-layout-duration) var(--sidebar-layout-easing);
+}
+
+.main-content.sidebar-hidden {
+    margin-left: 0;
+}
+
+.main-content.compact-mode {
+    margin-left: 70px;
+}
+
+.main-content.compact-mode.sidebar-hidden {
+    margin-left: 0;
+}
+
+/* Card Container Styles */
+.card-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Container */
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Page Title Styles */
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--theme-text);
+    margin-bottom: 24px;
+}
+
+/* Close Button Animation */
+.close-button {
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: rotate(90deg);
+}
+
+/* Settings Menu Styles */
+.settings-menu {
+    background: #1E2024 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px !important;
+    min-width: 280px !important;
+    padding: 8px !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.settings-menu-item {
+    padding: 12px 16px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    min-height: 56px !important;
+    border-radius: 8px !important;
+    margin: 4px 0 !important;
+    transition: all 0.2s ease !important;
+}
+
+.settings-menu-item:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.settings-menu-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.settings-menu-icon {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.settings-menu-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.settings-menu-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Enhanced Switch Styles */
+.settings-switch {
+    margin-left: 16px !important;
+}
+
+.settings-switch .MuiSwitch-switchBase {
+    padding: 12px !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease !important;
+}
+
+.settings-switch .MuiSwitch-thumb {
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #fff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.3s ease !important;
+}
+
+.settings-switch .MuiSwitch-track {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
+    border-radius: 20px !important;
+    height: 24px !important;
+    margin-top: -3px !important;
+    transition: all 0.3s ease !important;
+}
+
+.settings-switch .MuiSwitch-switchBase.Mui-checked {
+    transform: translateX(24px) !important;
+}
+
+.settings-switch .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+    background-color: #667eea !important;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4) !important;
+}
+
+.settings-switch .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    background-color: rgba(102, 126, 234, 0.3) !important;
+    opacity: 1 !important;
+    border: 1px solid rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Active Menu Item */
+.settings-menu-item.active {
+    background: rgba(102, 126, 234, 0.1) !important;
+}
+
+.settings-menu-item.active .settings-menu-icon {
+    background: rgba(102, 126, 234, 0.2);
+}
+
+.settings-menu-item.active .settings-menu-icon svg,
+.settings-menu-item.active .settings-menu-text {
+    color: #667eea !important;
+}
+
+/* Compact Mode Settings */
+.medicore-sidebar.compact-mode .settings-button {
+    padding: 8px;
+    justify-content: center;
+}
+
+.medicore-sidebar.compact-mode .settings-button span {
+    display: none;
+}
+
+/* Tooltip in Compact Mode */
+.nav-tooltip {
+    position: fixed;
+    background: rgba(26, 26, 26, 0.9);
+    color: var(--theme-on-brand);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 1100;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.nav-tooltip.visible {
+    opacity: 1;
+}
+
+/* Compact Mode Hover Menu - POLISHED */
+.hover-menu {
+    position: fixed;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 0;
+    min-width: 220px;
+    max-width: 300px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(102, 126, 234, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1100;
+    transform: translateX(-10px) scale(0.95);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+.hover-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+}
+
+.hover-menu.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0) scale(1);
+}
+
+/* Make hover menu scrollable if too tall */
+.hover-menu.scrollable {
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar for hover menu */
+.hover-menu.scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+
+.hover-menu.scrollable::-webkit-scrollbar-track {
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 3px;
+    margin: 4px;
+}
+
+.hover-menu.scrollable::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.2), rgba(102, 126, 234, 0.1));
+    border-radius: 3px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.hover-menu.scrollable::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.3), rgba(102, 126, 234, 0.2));
+}
+
+/* Hover submenu */
+.hover-submenu.scrollable {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.hover-submenu.scrollable::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hover-submenu.scrollable::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 2px;
+    margin: 2px;
+}
+
+.hover-submenu.scrollable::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+
+.hover-submenu.scrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Hover menu items - POLISHED */
+.hover-menu-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--theme-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-radius: 8px;
+    margin: 4px 8px;
+}
+
+.hover-menu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 0 2px 2px 0;
+}
+
+.hover-menu-item:hover {
+    background: rgba(102, 126, 234, 0.08);
+    color: var(--theme-text);
+    transform: translateX(2px);
+    border-radius: 8px;
+}
+
+.hover-menu-item:hover::before {
+    opacity: 1;
+}
+
+.hover-menu-item .MuiSvgIcon-root {
+    font-size: 20px;
+    color: var(--theme-brand);
+    transition: all 0.2s ease;
+}
+
+.hover-menu-item:hover .MuiSvgIcon-root {
+    color: #764ba2;
+    transform: scale(1.05);
+}
+
+.hover-menu-item .nav-badge {
+    position: absolute;
+    right: 16px;
+    min-width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #ff4b4b, #ff6b6b);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--theme-on-brand);
+    box-shadow: 0 2px 4px rgba(255, 75, 75, 0.3);
+}
+
+/* Parent item in hover menu - POLISHED */
+.hover-menu-item.parent-item {
+    background: linear-gradient(90deg, rgba(0, 102, 255, 0.1), rgba(76, 175, 80, 0.05));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 14px 16px;
+    position: relative;
+    border-radius: 8px;
+    margin: 4px 8px;
+}
+
+.hover-menu-item.parent-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    border-radius: 1px;
+}
+
+.hover-menu-item.parent-item:hover {
+    background: linear-gradient(90deg, rgba(0, 102, 255, 0.15), rgba(76, 175, 80, 0.1));
+    color: var(--theme-on-brand);
+    border-radius: 8px;
+}
+
+.hover-menu-item.parent-item .MuiSvgIcon-root {
+    color: rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* Submenu in Hover Menu - POLISHED */
+.hover-submenu {
+    padding-left: 48px;
+    position: relative;
+    background: rgba(102, 126, 234, 0.03);
+    border-radius: 0 0 12px 12px;
+}
+
+.hover-submenu::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.15), rgba(102, 126, 234, 0.05), rgba(102, 126, 234, 0.15));
+}
+
+.hover-submenu .hover-menu-item {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    color: var(--theme-text);
+    border-radius: 6px;
+    margin: 2px 8px;
+}
+
+.hover-submenu .hover-menu-item::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    width: 12px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(102, 126, 234, 0.1));
+}
+
+.hover-submenu .hover-menu-item:hover {
+    color: var(--theme-text);
+    background: rgba(102, 126, 234, 0.08);
+    border-radius: 6px;
+}
+
+/* Active states - POLISHED */
+.hover-menu-item.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.15), rgba(102, 126, 234, 0.1));
+    color: var(--theme-brand);
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.hover-menu-item.active::before {
+    opacity: 1;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    border-radius: 0 2px 2px 0;
+}
+
+.hover-menu-item.active .MuiSvgIcon-root {
+    color: var(--theme-brand);
+    filter: drop-shadow(0 1px 3px rgba(102, 126, 234, 0.3));
+}
+
+.hover-menu-item.active:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(102, 126, 234, 0.15));
+    color: var(--theme-brand);
+    border-radius: 8px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .medicore-sidebar {
+        transform: translateX(-100%);
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+        transition:
+            transform var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+            width var(--sidebar-layout-duration) var(--sidebar-layout-easing),
+            box-shadow calc(var(--sidebar-layout-duration) * 0.85) ease;
+    }
+
+    .medicore-sidebar.mobile-visible {
+        transform: translateX(0);
+        width: 280px !important; /* Slightly wider on mobile for better touch targets */
+    }
+
+    /* Mobile-specific nav menu adjustments */
+    .medicore-sidebar .nav-menu {
+        height: calc(100vh - 180px);
+        padding: 8px 16px;
+    }
+
+    .medicore-sidebar .nav-menu .MuiListItemButton-root {
+        padding: 12px 16px;
+        margin: 4px 0;
+        min-height: 48px; /* Better touch targets */
+        border-radius: 12px;
+    }
+
+    .medicore-sidebar .nav-menu .MuiListItemIcon-root {
+        min-width: 40px;
+    }
+
+    .medicore-sidebar .nav-menu .MuiListItemText-primary {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* Mobile-specific connector adjustments */
+    .medicore-sidebar .nav-menu .MuiCollapse-root::before {
+        left: 20px; /* Align with mobile layout */
+        width: 3px;
+    }
+
+    .medicore-sidebar .nav-menu .MuiCollapse-root .MuiListItemButton-root {
+        margin-left: 20px;
+        padding-left: 24px;
+    }
+
+    .medicore-sidebar .nav-menu .MuiCollapse-root .MuiListItemButton-root::before {
+        left: -20.5px; /* Align with mobile connector line */
+        width: 8px;
+        height: 8px; /* Larger dots for better touch visibility */
+    }
+
+    /* Prevent text wrapping on mobile */
+    .medicore-sidebar .nav-menu .MuiListItemText-primary {
+        font-size: 0.9rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Enhanced touch feedback on mobile */
+    .medicore-sidebar .nav-menu .MuiCollapse-root .MuiListItemButton-root:active {
+        transform: translateX(0) scale(0.98); /* Keep aligned, only scale */
+        background: rgba(76, 175, 80, 0.15);
+    }
+
+    .medicore-sidebar.mobile-visible.compact-mode .logo-text,
+    .medicore-sidebar.mobile-visible.compact-mode .animated-subtitle,
+    .medicore-sidebar.mobile-visible.compact-mode .search-wrapper,
+    .medicore-sidebar.mobile-visible.compact-mode .user-info,
+    .medicore-sidebar.mobile-visible.compact-mode .premium-badge,
+    .medicore-sidebar.mobile-visible.compact-mode .nav-text,
+    .medicore-sidebar.mobile-visible.compact-mode .nav-arrow {
+        display: block; /* Show all elements in mobile view regardless of compact mode */
+    }
+
+    .medicore-sidebar.mobile-visible.compact-mode .nav-icon {
+        margin: 0;
+    }
+
+    /* Overlay */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity var(--sidebar-layout-duration) var(--sidebar-layout-easing);
+    }
+
+    .sidebar-overlay.visible {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Enhanced Header and Content in Mobile */
+    .main-header {
+        left: 0 !important; /* Override all other states */
+        height: 65px;
+        padding: 0 16px;
+    }
+
+    .main-header.enhanced {
+        height: 65px;
+    }
+
+    .header-center-section {
+        display: none; /* Hide search on mobile */
+    }
+
+    .header-time-display {
+        display: none; /* Hide time on mobile */
+    }
+
+    .header-quick-actions {
+        display: none; /* Hide quick actions on mobile */
+    }
+
+    .header-right-section {
+        gap: 8px;
+        flex: 1;
+        justify-content: flex-end;
+        max-width: 50%;
+    }
+
+    /* Mobile header adjustments */
+    .header-left-section {
+        flex: 1;
+        max-width: calc(100% - 100px) !important; /* More space for breadcrumb section */
+        overflow: visible; /* Allow breadcrumb to show properly */
+    }
+
+    .header-breadcrumb {
+        flex: 1; /* Allow breadcrumb to take more space */
+        max-width: calc(100vw - 160px); /* Use more of available space */
+        overflow: hidden;
+    }
+
+    .breadcrumb-info {
+        flex: 1; /* Allow breadcrumb info to expand */
+        min-width: 0; /* Allow shrinking */
+    }
+
+    .header-breadcrumb .page-title {
+        font-size: 0.9rem !important; /* Smaller font on mobile */
+        font-weight: 600 !important;
+        max-width: 300px; /* Increased width for better visibility on mobile */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .breadcrumb-meta {
+        display: flex; /* Show time on mobile */
+    }
+
+    .header-icon-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header-profile.enhanced {
+        padding: 6px 12px;
+    }
+
+    .main-content {
+        margin-left: 0 !important; /* Override all other states */
+        margin-top: 65px;
+        padding: 0 !important;
+        min-height: calc(100vh - 65px);
+    }
+
+    /* Mobile theme-responsive styles */
+    .main-header.enhanced.dark-theme {
+        background: linear-gradient(135deg, #1a1d21 0%, #2c3e50 100%);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .main-header.enhanced.light-theme {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+    }
+
+    /* Ensure FlexPos branding is visible on mobile */
+    .medicore-sidebar.mobile-visible .animated-subtitle {
+        display: block !important;
+        visibility: visible !important;
+        width: 120px; /* Slightly narrower for mobile */
+    }
+}
+
+/* Settings Button Normal Mode */
+.settings-button {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    margin-top: auto;
+    transition: all 0.2s ease;
+}
+
+.settings-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.settings-button .MuiSvgIcon-root {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+}
+
+.settings-button span {
+    font-size: 14px;
+    font-weight: 500;
+} 
+
+/* --- PROFESSIONAL LIGHT MODE POLISH --- */
+.medicore-sidebar.sidebar-light {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+    color: var(--theme-text);
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.12);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .sidebar-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    border-top-right-radius: 0;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .logo-icon {
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--theme-brand);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+    transition: all 0.3s ease;
+}
+
+.medicore-sidebar.sidebar-light .logo-text h6 {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.medicore-sidebar.sidebar-light .animated-subtitle .subtitle {
+    color: #64748b;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+.medicore-sidebar.sidebar-light .header-actions .MuiIconButton-root {
+    color: var(--theme-brand);
+    transition: color 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .header-actions .MuiIconButton-root .MuiSvgIcon-root {
+    color: var(--theme-text);
+}
+
+.medicore-sidebar.sidebar-light .search-wrapper {
+    background: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .search-wrapper:hover {
+    background: rgba(241, 245, 249, 1);
+    border-color: rgba(203, 213, 225, 0.8);
+}
+
+.medicore-sidebar.sidebar-light .search-icon {
+    color: #64748b;
+}
+
+.medicore-sidebar.sidebar-light .search-input {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.medicore-sidebar.sidebar-light .search-input::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+.medicore-sidebar.sidebar-light .user-profile {
+    background: rgba(248, 250, 252, 0.6);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    color: var(--theme-text);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .user-profile:hover {
+    background: rgba(248, 250, 252, 1);
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.medicore-sidebar.sidebar-light .user-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-subtitle1 {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-caption {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.medicore-sidebar.sidebar-light .premium-badge {
+    background: #667eea;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(255, 215, 0, 0.10);
+}
+
+.medicore-sidebar.sidebar-light .status-indicator {
+    background: #667eea;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu {
+    background: var(--theme-surface-alt);
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.medicore-sidebar.sidebar-light .nav-link {
+    background: transparent;
+    color: #374151;
+    border-radius: 12px;
+    font-weight: 500;
+    padding: 10px 8px;
+    margin: 0 4px;
+    display: flex;
+    align-items: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .nav-link .nav-icon {
+    color: #374151;
+    background: none;
+    margin-right: 12px;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .nav-link .nav-badge {
+    background: #667eea;
+    color: #fff;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 0 6px;
+    margin-left: 12px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+.medicore-sidebar.sidebar-light .nav-link .nav-arrow {
+    color: #9ca3af;
+    margin-left: auto;
+    font-size: 20px;
+    transition: color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .nav-link.active,
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.05) 100%);
+    color: #1e293b;
+    font-weight: 700;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.12);
+    position: relative;
+    z-index: 2;
+}
+
+.medicore-sidebar.sidebar-light .nav-link.active .nav-icon,
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link .nav-icon {
+    color: var(--theme-brand);
+}
+
+.medicore-sidebar.sidebar-light .nav-link.active .nav-badge,
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link .nav-badge {
+    background: #667eea;
+    color: #fff;
+}
+
+.medicore-sidebar.sidebar-light .nav-link.active .nav-arrow,
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link .nav-arrow {
+    color: #9ca3af;
+}
+
+.medicore-sidebar.sidebar-light .nav-badge {
+    background: #667eea;
+    color: #fff;
+    border: 2px solid #fff;
+    font-weight: 600;
+    font-size: 0.75rem;
+    box-shadow: 0 1px 4px rgba(102, 126, 234, 0.10);
+}
+
+.medicore-sidebar.sidebar-light .nav-arrow {
+    color: var(--theme-brand);
+    transition: color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .nav-dropdown {
+    background: linear-gradient(135deg, rgba(241, 245, 249, 0.6) 0%, rgba(248, 250, 252, 0.4) 100%) !important;
+    border-left: 2px solid rgba(102, 126, 234, 0.3) !important;
+    border-radius: 0 0 12px 12px !important;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    border-top: none !important;
+    padding: 8px 0 8px 0 !important;
+}
+
+.medicore-sidebar.sidebar-light:not(.compact-mode) .nav-dropdown::before {
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.12), rgba(118, 75, 162, 0.08), rgba(102, 126, 234, 0.12)) !important;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item {
+    background: transparent !important;
+    color: #000000 !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    margin: 2px 4px !important;
+    padding: 8px 8px 8px 32px !important;
+    position: relative !important;
+    transition: background 0.2s, color 0.2s !important;
+    overflow: visible !important;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item:hover {
+    background: #d1f5e4 !important;
+    color: #1a1a1a !important;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item.active {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.06) 0%, rgba(118, 75, 162, 0.03) 100%) !important;
+    color: #1e293b !important;
+    font-weight: 700 !important;
+    border-left: 3px solid #667eea !important;
+    box-shadow: 0 1px 4px rgba(102, 126, 234, 0.08) !important;
+}
+
+
+.medicore-sidebar.sidebar-light .subnav-item::after {
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    background: #ffffff;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item:hover {
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.08), rgba(76, 175, 80, 0.04));
+    color: var(--theme-text);
+    transform: translateX(2px);
+}
+
+.medicore-sidebar.sidebar-light .subnav-item:hover::after {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.medicore-sidebar.sidebar-light .subnav-item.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.15), rgba(102, 126, 234, 0.1));
+    color: var(--theme-text);
+    font-weight: 700;
+    border-left: 4px solid #667eea;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.medicore-sidebar.sidebar-light .subnav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: #667eea;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(102, 126, 234, 0.3);
+    border: 2px solid #ffffff;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item.active .subnav-text {
+    color: var(--theme-text);
+    font-weight: 700;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item.active::after {
+    display: none;
+}
+
+.medicore-sidebar.sidebar-light .subnav-item:hover::before,
+.medicore-sidebar.sidebar-light .subnav-item.active:hover::before {
+    box-shadow: 0 0 8px 3px rgba(102, 126, 234, 0.4), 0 0 0 2px #667eea;
+    background: #667eea;
+}
+
+.medicore-sidebar.sidebar-light .subnav-text {
+    color: #1a1a1a !important;
+    font-weight: 500 !important;
+    position: relative;
+    z-index: 1;
+}
+
+.medicore-sidebar.sidebar-light .sidebar-footer {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-bottom-right-radius: 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.medicore-sidebar.sidebar-light .bottom-actions {
+    background: rgba(241, 245, 249, 0.6);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    color: #1e293b;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .bottom-actions:hover {
+    background: rgba(241, 245, 249, 1);
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.medicore-sidebar.sidebar-light .action-button {
+    color: #667eea !important;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .action-button-badge {
+    background: #667eea !important;
+    color: #fff !important;
+    border: none !important;
+    font-weight: 600;
+    font-size: 0.75rem;
+    box-shadow: 0 1px 4px rgba(102, 126, 234, 0.10);
+}
+
+.medicore-sidebar.sidebar-light .nav-link .nav-badge,
+.medicore-sidebar.sidebar-light .nav-link.active .nav-badge,
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link .nav-badge {
+    background: #667eea;
+    color: #fff;
+}
+
+.medicore-sidebar.sidebar-light .settings-button {
+    background: #f5f7fa;
+    color: var(--theme-text);
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .settings-button:hover {
+    background: #f0f4ff;
+}
+
+.medicore-sidebar.sidebar-light .settings-button .MuiSvgIcon-root {
+    color: var(--theme-text);
+    transition: color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .settings-button span {
+    color: var(--theme-text);
+}
+
+/* Tooltip */
+.medicore-sidebar.sidebar-light .nav-tooltip {
+    background: #667eea;
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    transition: background 0.2s, color 0.2s;
+}
+
+/* Hover Menu */
+.medicore-sidebar.sidebar-light .hover-menu {
+    background: #fff;
+    color: var(--theme-text);
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.08);
+    border-radius: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .hover-menu-item {
+    color: var(--theme-text);
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.medicore-sidebar.sidebar-light .hover-menu-item:hover {
+    background: #f0f4ff;
+    color: var(--theme-brand);
+}
+
+.medicore-sidebar.sidebar-light .hover-menu-item.active {
+    background: #f0f4ff;
+    color: var(--theme-brand);
+    font-weight: 700;
+}
+
+.medicore-sidebar.sidebar-light .hover-menu-item .MuiSvgIcon-root {
+    color: var(--theme-brand);
+}
+
+.medicore-sidebar.sidebar-light .hover-menu-item .nav-badge {
+    background: #667eea;
+    color: #fff;
+    border: 2px solid #fff;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+/* Compact mode adjustments for light mode */
+.medicore-sidebar.sidebar-light.compact-mode .logo-text,
+.medicore-sidebar.sidebar-light.compact-mode .animated-subtitle,
+.medicore-sidebar.sidebar-light.compact-mode .search-wrapper,
+.medicore-sidebar.sidebar-light.compact-mode .user-info,
+.medicore-sidebar.sidebar-light.compact-mode .premium-badge,
+.medicore-sidebar.sidebar-light.compact-mode .nav-text,
+.medicore-sidebar.sidebar-light.compact-mode .nav-arrow {
+    color: var(--theme-text);
+}
+
+.medicore-sidebar.sidebar-light.compact-mode .nav-icon {
+    background: none;
+    color: #2f332f !important;
+}
+
+.medicore-sidebar.sidebar-light.compact-mode .nav-badge {
+    background: #667eea;
+    color: #fff;
+    border: none;
+    height: 14px;
+    min-width: 14px;
+    font-size: 0.65rem;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.medicore-sidebar.sidebar-light .bottom-actions,
+.medicore-sidebar.sidebar-light .action-button {
+    color: #1a1a1a !important;
+}
+
+.medicore-sidebar.sidebar-light .search-input {
+    color: var(--theme-text);
+}
+
+.medicore-sidebar.sidebar-light .search-input::placeholder {
+    color: var(--theme-text);
+    opacity: 0.7;
+} 
+
+.medicore-sidebar.sidebar-light .nav-item.has-active-child > .nav-link {
+    background: #f0f4ff;
+    color: var(--theme-text);
+    font-weight: 700;
+    border-left: 4px solid #667eea;
+    box-shadow: none;
+}
+
+.medicore-sidebar.sidebar-light .nav-item.has-active-child > .nav-link .nav-icon {
+    color: var(--theme-brand);
+} 
+
+/* 1. Subtle hover effect for parent and child */
+.medicore-sidebar.sidebar-light .nav-link:hover,
+.medicore-sidebar.sidebar-light .nav-item.has-active-child > .nav-link:hover {
+    background: #e6f9f0;
+    box-shadow: 0 2px 8px rgba(34, 181, 115, 0.08);
+    color: var(--theme-text);
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.medicore-sidebar.sidebar-light .subnav-item:hover {
+    background: #e6f9f0;
+    color: var(--theme-text);
+    transition: background 0.2s, color 0.2s;
+}
+
+/* 2. Smoother transitions for all relevant properties */
+.medicore-sidebar.sidebar-light .nav-link,
+.medicore-sidebar.sidebar-light .subnav-item,
+.medicore-sidebar.sidebar-light .nav-item.has-active-child > .nav-link {
+    transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+/* 3. More distinct dot indicator for child */
+.medicore-sidebar.sidebar-light .subnav-item.active::before {
+    width: 10px;
+    height: 10px;
+    left: 28px;
+    background: #667eea;
+    box-shadow: 0 0 6px 2px #f0f4ff;
+    border: 2px solid #fff;
+}
+
+/* 4. Focus state for accessibility */
+.medicore-sidebar.sidebar-light .nav-link:focus,
+.medicore-sidebar.sidebar-light .subnav-item:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #667eea, 0 2px 8px rgba(102, 126, 234, 0.10);
+    background: #f0f4ff;
+}
+
+/* 5. Compact mode polish for dot indicator */
+.medicore-sidebar.sidebar-light.compact-mode .subnav-item.active::before {
+    left: 18px;
+} 
+
+.medicore-sidebar .bottom-actions {
+    padding: 6px 8px;
+    gap: 6px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    min-height: 36px;
+}
+
+.medicore-sidebar .action-button {
+    padding: 4px 8px !important;
+    font-size: 0.95rem;
+    gap: 6px !important;
+}
+
+.medicore-sidebar .action-button .MuiSvgIcon-root {
+    font-size: 18px !important;
+}
+
+.medicore-sidebar .action-button span {
+    font-size: 13px;
+} 
+
+/* Light Mode Hover Menu - POLISHED */
+.hover-menu.sidebar-light {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%) !important;
+    border-radius: 12px !important;
+    box-shadow: 
+        0 8px 32px rgba(76, 175, 80, 0.15),
+        0 4px 16px rgba(76, 175, 80, 0.08),
+        0 0 0 1px rgba(76, 175, 80, 0.1) !important;
+    border: 1px solid rgba(76, 175, 80, 0.12) !important;
+    backdrop-filter: blur(20px) !important;
+}
+
+.hover-menu.sidebar-light::before {
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent) !important;
+}
+
+/* Light Mode Hover Menu Items */
+.hover-menu.sidebar-light .hover-menu-item {
+    color: #374151 !important;
+    font-weight: 500 !important;
+    border-radius: 8px !important;
+    margin: 4px 8px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item::before {
+    background: linear-gradient(180deg, #667eea, #764ba2) !important;
+    border-radius: 0 2px 2px 0 !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.08), rgba(102, 126, 234, 0.05)) !important;
+    color: #1a1a1a !important;
+    transform: translateX(2px) !important;
+    border-radius: 8px !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item:hover::before {
+    opacity: 1 !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item .MuiSvgIcon-root {
+    color: #667eea !important;
+    transition: all 0.2s ease !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item:hover .MuiSvgIcon-root {
+    color: #764ba2 !important;
+    transform: scale(1.05) !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item .nav-badge {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3) !important;
+}
+
+/* Light Mode Parent Item */
+.hover-menu.sidebar-light .hover-menu-item.parent-item {
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)) !important;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.15) !important;
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    border-radius: 8px !important;
+    margin: 4px 8px !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.parent-item::after {
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.2), transparent) !important;
+    border-radius: 1px !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.parent-item:hover {
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.15), rgba(76, 175, 80, 0.1)) !important;
+    color: #1a1a1a !important;
+    border-radius: 8px !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.parent-item .MuiSvgIcon-root {
+    color: #667eea !important;
+    filter: drop-shadow(0 1px 2px rgba(102, 126, 234, 0.2)) !important;
+}
+
+/* Light Mode Submenu */
+.hover-menu.sidebar-light .hover-submenu {
+    background: rgba(25, 118, 210, 0.03) !important;
+    border-radius: 0 0 12px 12px !important;
+}
+
+.hover-menu.sidebar-light .hover-submenu::before {
+    background: linear-gradient(180deg, rgba(25, 118, 210, 0.2), rgba(25, 118, 210, 0.1), rgba(25, 118, 210, 0.2)) !important;
+}
+
+.hover-menu.sidebar-light .hover-submenu .hover-menu-item {
+    color: #667eea !important;
+    border-radius: 6px !important;
+    margin: 2px 8px !important;
+}
+
+.hover-menu.sidebar-light .hover-submenu .hover-menu-item::before {
+    background: linear-gradient(90deg, rgba(25, 118, 210, 0.3), rgba(25, 118, 210, 0.15)) !important;
+}
+
+.hover-menu.sidebar-light .hover-submenu .hover-menu-item:hover {
+    color: #1a1a1a !important;
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.08), rgba(76, 175, 80, 0.04)) !important;
+    border-radius: 6px !important;
+}
+
+/* Light Mode Active States */
+.hover-menu.sidebar-light .hover-menu-item.active {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.15), rgba(102, 126, 234, 0.1)) !important;
+    color: #667eea !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.active::before {
+    opacity: 1 !important;
+    background: linear-gradient(180deg, #667eea, #764ba2) !important;
+    border-radius: 0 2px 2px 0 !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.active .MuiSvgIcon-root {
+    color: #667eea !important;
+    filter: drop-shadow(0 1px 3px rgba(102, 126, 234, 0.3)) !important;
+}
+
+.hover-menu.sidebar-light .hover-menu-item.active:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(102, 126, 234, 0.15)) !important;
+    color: #667eea !important;
+    border-radius: 8px !important;
+}
+
+/* Light Mode Scrollbars */
+.medicore-sidebar.sidebar-light .hover-menu.scrollable::-webkit-scrollbar-track {
+    background: rgba(25, 118, 210, 0.05);
+}
+
+.medicore-sidebar.sidebar-light .hover-menu.scrollable::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(76, 175, 80, 0.3), rgba(76, 175, 80, 0.2));
+    border: 1px solid rgba(76, 175, 80, 0.15);
+}
+
+.medicore-sidebar.sidebar-light .hover-menu.scrollable::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(76, 175, 80, 0.4), rgba(76, 175, 80, 0.3));
+}
+
+.medicore-sidebar.sidebar-light .hover-submenu.scrollable::-webkit-scrollbar-track {
+    background: rgba(76, 175, 80, 0.03);
+}
+
+.medicore-sidebar.sidebar-light .hover-submenu.scrollable::-webkit-scrollbar-thumb {
+    background: rgba(76, 175, 80, 0.25);
+}
+
+.medicore-sidebar.sidebar-light .hover-submenu.scrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(76, 175, 80, 0.35);
+} 
+
+/* Remove or comment out the global override if present: */
+/* .MuiBox-root { display: block !important; } */
+
+/* Add this scoped rule for the sidebar only: */
+.sidebar-box {
+    display: block !important;
+}
+
+/* Additional optimizations for text wrapping prevention */
+.medicore-sidebar .nav-text,
+.medicore-sidebar .subnav-text {
+    min-width: 0;
+    flex: 1;
+}
+
+/* Light Theme Override - Keep Webuzo Dark */
+.medicore-sidebar.sidebar-light {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.medicore-sidebar.sidebar-light .sidebar-header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+.medicore-sidebar.sidebar-light .search-wrapper {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.medicore-sidebar.sidebar-light .search-input {
+    color: #ffffff;
+}
+
+.medicore-sidebar.sidebar-light .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu {
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiListItemButton-root.Mui-selected {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-left-color: var(--theme-brand);
+}
+
+.medicore-sidebar.sidebar-light .user-profile {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.medicore-sidebar.sidebar-light .user-profile:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-subtitle1 {
+    color: #ffffff;
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-caption {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.medicore-sidebar.sidebar-light .sidebar-footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.medicore-sidebar.sidebar-light .nav-menu .MuiChip-root {
+    display: none;
+}
+
+/* Ensure icons don't take too much space */
+.medicore-sidebar .nav-icon {
+    min-width: 22px;
+    max-width: 22px;
+    font-size: 18px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Optimize nav-arrow space */
+.medicore-sidebar .nav-arrow {
+    min-width: 18px;
+    max-width: 18px;
+    font-size: 16px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Enhanced active state styling */
+.medicore-sidebar.sidebar-light .nav-item.active > .nav-link {
+    background: #f0f4ff !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    border-left: 4px solid #667eea !important;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15) !important;
+    margin-left: 8px !important;
+    padding-left: 12px !important;
+}
+
+/* Enhanced subnav active state */
+.medicore-sidebar.sidebar-light .subnav-item.active {
+    background: #f0f4ff !important;
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    border-left: 3px solid #667eea !important;
+    margin-left: 12px !important;
+    padding-left: 41px !important;
+}
+
+/* User Profile Section */
+.user-profile {
+    display: flex !important;
+    align-items: center;
+    padding: 16px;
+    margin: 16px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.user-profile:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-on-brand);
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4caf50;
+    border: 2px solid #1a1d21;
+}
+
+.user-info {
+    flex: 1;
+    min-width: 0; /* Allow text to overflow properly */
+    display: flex !important;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.user-info .MuiTypography-subtitle1 {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+}
+
+.user-info .MuiTypography-caption {
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 !important;
+}
+
+/* Mobile Styles for User Profile */
+@media (max-width: 768px) {
+    .user-profile {
+        margin: 12px;
+        padding: 12px;
+        margin-bottom: 4px;
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    .user-info .MuiTypography-subtitle1 {
+        font-size: 13px !important;
+    }
+
+    .user-info .MuiTypography-caption {
+        font-size: 11px !important;
+    }
+}
+
+/* Compact Mode User Profile */
+.medicore-sidebar.compact-mode .user-profile {
+    justify-content: center;
+    padding: 12px 8px;
+    margin: 12px 8px;
+}
+
+.medicore-sidebar.compact-mode .user-avatar {
+    margin-right: 0;
+}
+
+.medicore-sidebar.compact-mode .user-info {
+    display: none !important;
+}
+
+.medicore-sidebar.compact-mode .status-indicator {
+    display: none;
+}
+
+/* Light Theme User Profile */
+.medicore-sidebar.sidebar-light .user-profile {
+    background: rgba(248, 250, 252, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+.medicore-sidebar.sidebar-light .user-profile:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.medicore-sidebar.sidebar-light .user-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.medicore-sidebar.sidebar-light .status-indicator {
+    border-color: rgba(255, 255, 255, 0.9);
+    background: #10b981;
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-subtitle1 {
+    color: #1e293b !important;
+}
+
+.medicore-sidebar.sidebar-light .user-info .MuiTypography-caption {
+    color: #64748b !important;
+}
+
+/* Mobile Sidebar Separator */
+.mobile-sidebar-separator {
+    display: block !important;
+    padding: 4px 0; /* Add some vertical spacing */
+}
+
+/* Light theme mobile separator */
+.medicore-sidebar.sidebar-light .mobile-sidebar-separator div {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ===== THEME TOGGLE BUTTON STYLING ===== */
+.header-theme-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.header-theme-toggle .theme-toggle-btn {
+    background: rgba(241, 245, 249, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.header-theme-toggle .theme-toggle-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+}
+
+.main-header.enhanced.dark-theme .header-theme-toggle .theme-toggle-btn {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(71, 85, 105, 0.4);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.main-header.enhanced.dark-theme .header-theme-toggle .theme-toggle-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.35);
+}
+
+.main-header.enhanced.light-theme .header-theme-toggle .theme-toggle-btn {
+    color: #64748b;
+}
+
+.main-header.enhanced.light-theme .header-theme-toggle .theme-toggle-btn:hover {
+    color: white !important;
+}
+
+/* ===== Hospital-style visual overrides (design-only) ===== */
+.medicore-sidebar.hospital-theme {
+    background: #ffffff !important;
+    border-right: 1px solid #e2e8f0 !important;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08) !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-header,
+.medicore-sidebar.hospital-theme .search-section {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.medicore-sidebar.hospital-theme .logo-icon {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+    border-radius: 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .logo-text h6,
+.medicore-sidebar.hospital-theme .subtitle {
+    color: #1e293b !important;
+}
+
+.medicore-sidebar.hospital-theme .search-wrapper {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+.medicore-sidebar.hospital-theme .search-wrapper:focus-within {
+    background: #ffffff !important;
+    border-color: #5eead4 !important;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12) !important;
+}
+
+.medicore-sidebar.hospital-theme .search-input {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+.medicore-sidebar.hospital-theme .search-input::placeholder,
+.medicore-sidebar.hospital-theme .search-icon,
+.medicore-sidebar.hospital-theme .search-clear-btn {
+    color: #94a3b8 !important;
+}
+
+.medicore-sidebar.hospital-theme .search-input:focus {
+    color: #334155 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu {
+    background: #ffffff !important;
+    scrollbar-color: #cbd5e1 transparent !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiList-root {
+    color: #475569 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root {
+    color: #475569 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:hover {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+    border-left: 3px solid #14b8a6 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemText-primary,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemText-root {
+    color: #64748b !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:hover .MuiListItemIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiListItemIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-footer {
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button:hover {
+    background: #f1f5f9 !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button-badge {
+    background: #14b8a6 !important;
+    color: #ffffff !important;
+}
+
+.main-header.enhanced,
+.main-header.enhanced.light-theme {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05) !important;
+}
+
+.main-header.enhanced .menu-trigger,
+.main-header.enhanced .page-title,
+.main-header.enhanced .header-icon-button,
+.main-header.enhanced .header-profile {
+    color: #334155 !important;
+}
+
+.main-content {
+    background: #f8fafc !important;
+}
+
+.sidebar-overlay {
+    background: rgba(15, 23, 42, 0.4) !important;
+}
+
+/* Hospital exactness pass: spacing/geometry/interaction */
+.medicore-sidebar.hospital-theme {
+    width: 240px !important;
+}
+
+.medicore-sidebar.hospital-theme.compact-mode {
+    width: 76px !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-header {
+    padding: 14px 14px 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .header-content {
+    align-items: center !important;
+}
+
+.medicore-sidebar.hospital-theme .logo-section {
+    gap: 12px !important;
+    align-items: center !important;
+}
+
+.medicore-sidebar.hospital-theme .logo-icon {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 14px !important;
+}
+
+.medicore-sidebar.hospital-theme .subtitle {
+    color: #64748b !important;
+}
+
+.medicore-sidebar.hospital-theme .header-actions .MuiIconButton-root {
+    color: #64748b !important;
+    border-radius: 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .header-actions .MuiIconButton-root:hover {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+.medicore-sidebar.hospital-theme .search-section {
+    padding: 12px 14px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu {
+    padding: 10px 8px 12px !important;
+    height: calc(100vh - 210px) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItem-root {
+    margin-bottom: 4px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root {
+    border-radius: 12px !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    border-left: 0 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] {
+    background: var(--theme-brand-surface) !important;
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root {
+    margin-top: 4px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root {
+    margin-left: 10px !important;
+    width: calc(100% - 14px) !important;
+    padding-left: 12px !important;
+    border-radius: 10px !important;
+    color: #64748b !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root:hover {
+    background: #f8fafc !important;
+    color: #334155 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-footer {
+    padding: 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .bottom-actions {
+    padding: 0 !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button {
+    height: 40px !important;
+    padding: 8px 10px !important;
+    font-weight: 500 !important;
+}
+
+.main-header.enhanced {
+    height: 64px !important;
+}
+
+.main-header.enhanced .menu-trigger {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+}
+
+.main-header.enhanced .menu-trigger:hover {
+    background: #f8fafc !important;
+}
+
+.main-header.enhanced .page-title {
+    font-weight: 600 !important;
+    color: #0f172a !important;
+}
+
+.main-header.enhanced .header-icon-button {
+    border-radius: 12px !important;
+}
+
+.main-header.enhanced .header-icon-button:hover {
+    background: #f8fafc !important;
+}
+
+.main-content {
+    padding-top: 76px !important;
+}
+
+@media (max-width: 768px) {
+    .medicore-sidebar.hospital-theme {
+        width: min(82vw, 280px) !important;
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.22) !important;
+    }
+}
+
+/* Hospital visibility polish */
+.medicore-sidebar.hospital-theme .search-input::placeholder {
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root i {
+    font-size: 20px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root .MuiTypography-root {
+    color: #334155 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root .MuiTypography-root {
+    color: #64748b !important;
+    font-weight: 500 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] .MuiTypography-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:hover .MuiTypography-root {
+    color: #0f172a !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root .MuiSvgIcon-root {
+    color: #334155 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] .MuiSvgIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-footer .bottom-actions {
+    border-radius: 14px !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button {
+    border-radius: 14px !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button span {
+    color: #334155 !important;
+    font-weight: 600 !important;
+}
+
+.medicore-sidebar.hospital-theme .action-button .MuiSvgIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-footer {
+    margin-top: 8px !important;
+}
+
+/* FINAL strict hospital parity overrides */
+.sidebar-box {
+    display: block !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+}
+
+.medicore-sidebar.hospital-theme,
+.medicore-sidebar.hospital-theme * {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.medicore-sidebar.hospital-theme {
+    background: #ffffff !important;
+}
+
+.medicore-sidebar.hospital-theme .search-section {
+    padding: 12px 14px !important;
+}
+
+.medicore-sidebar.hospital-theme .search-wrapper {
+    height: 40px !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.medicore-sidebar.hospital-theme .search-wrapper:focus-within {
+    border-color: #14b8a6 !important;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.14) !important;
+}
+
+.medicore-sidebar.hospital-theme .search-input {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: geometricPrecision !important;
+}
+
+.medicore-sidebar.hospital-theme .search-icon {
+    color: #64748b !important;
+}
+
+.medicore-sidebar.hospital-theme .search-input::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+    font-weight: 600 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu {
+    background: #ffffff !important;
+    padding: 8px 10px 10px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItem-root {
+    margin-bottom: 5px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root {
+    min-height: 44px !important;
+    border-radius: 12px !important;
+    padding: 10px 12px !important;
+    color: #334155 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root .MuiTypography-root {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    letter-spacing: 0 !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: geometricPrecision !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:hover {
+    background: #f1f5f9 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:hover .MuiTypography-root {
+    color: #1e293b !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] {
+    background: var(--theme-brand-muted) !important;
+    border-left: 3px solid #14b8a6 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] .MuiTypography-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root {
+    min-width: 24px !important;
+    color: #334155 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemIcon-root i {
+    font-size: 16px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root {
+    min-height: 38px !important;
+    margin-left: 12px !important;
+    width: calc(100% - 16px) !important;
+    border-radius: 10px !important;
+    padding: 8px 10px !important;
+    background: transparent !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root .MuiTypography-root {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: geometricPrecision !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected {
+    background: var(--theme-brand-muted) !important;
+    border-left: 3px solid #14b8a6 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected .MuiTypography-root {
+    color: var(--theme-brand) !important;
+    font-weight: 600 !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-footer {
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    padding: 10px 12px 12px !important;
+}
+
+.medicore-sidebar.hospital-theme .main-header,
+.main-header.enhanced.light-theme {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* ===== Header hospital-style override ===== */
+.main-header.enhanced.light-theme {
+    left: 240px !important;
+    height: 64px !important;
+    padding: 0 16px !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
+    backdrop-filter: none !important;
+}
+
+.main-header.enhanced.light-theme.compact-mode {
+    left: 76px !important;
+}
+
+.main-header.enhanced.light-theme.sidebar-hidden {
+    left: 0 !important;
+}
+
+/* School-themed scrollbar colors */
+.medicore-sidebar.hospital-theme .nav-menu {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--theme-brand) #e2e8f0 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar {
+    width: var(--sidebar-scrollbar-width) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-track {
+    background: #f1f5f9 !important;
+    border-radius: 10px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb {
+    background: var(--theme-brand) !important;
+    border-radius: 3px !important;
+    border: 0 !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-brand-hover) !important;
+}
+
+/* Ensure thin scrollbar on all engines where possible */
+.medicore-sidebar.hospital-theme .nav-menu {
+    scrollbar-width: thin !important;
+}
+
+/* ===== True hospital layout: header on top, sidebar below ===== */
+.main-header.enhanced.light-theme {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    z-index: 1001 !important;
+}
+
+.medicore-sidebar.hospital-theme {
+    top: 64px !important;
+    height: calc(100vh - 64px) !important;
+    z-index: 1000 !important;
+}
+
+.medicore-sidebar.hospital-theme.compact-mode {
+    top: 64px !important;
+    height: calc(100vh - 64px) !important;
+}
+
+.main-content {
+    margin-top: 64px !important;
+}
+
+/* Header breadcrumb-info block */
+.main-header.enhanced.light-theme .header-breadcrumb {
+    display: flex !important;
+    align-items: center !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    background: #f8fafc !important;
+    padding: 8px 12px !important;
+    min-height: 40px !important;
+}
+
+.main-header.enhanced.light-theme .breadcrumb-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+.main-header.enhanced.light-theme .page-title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+}
+
+@media (max-width: 768px) {
+    .medicore-sidebar.hospital-theme,
+    .medicore-sidebar.hospital-theme.compact-mode {
+        top: 0 !important;
+        height: 100vh !important;
+    }
+}
+
+.main-header.enhanced.light-theme .header-left-section {
+    max-width: calc(100% - 180px) !important;
+    gap: 12px !important;
+}
+
+.header-menu-slot {
+    width: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-trigger-placeholder {
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.main-header.enhanced.light-theme .header-left-section {
+    max-width: none !important;
+    gap: 10px !important;
+}
+
+/* ---- Header brand row: lockup | divider | refresh + typewriter panel ---- */
+.header-brand-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 2px;
+    border-radius: 0;
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.header-brand-lockup {
+    padding: 6px 12px 6px 8px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%) !important;
+    border: 1px solid #e8ecf1 !important;
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.header-brand-text-only {
+    padding: 7px 14px !important;
+}
+
+.header-brand-text-only .header-brand-title {
+    letter-spacing: 0.04em;
+}
+
+.header-brand-toolbar-divider {
+    align-self: center;
+    flex-shrink: 0;
+    width: 1px;
+    height: 34px;
+    margin: 0 10px 0 12px;
+    background: linear-gradient(180deg, transparent 0%, #e2e8f0 15%, #e2e8f0 85%, transparent 100%);
+}
+
+.header-brand-messages {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1 1 0;
+}
+
+/* Quick-access ribbon pills (Jinora-style) */
+.header-ribbons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 2px 2px 2px 0;
+}
+
+.header-ribbons::-webkit-scrollbar {
+    display: none;
+}
+
+.header-ribbon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    height: 34px;
+    padding: 0 14px 0 11px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #374151;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.header-ribbon:hover {
+    border-color: var(--theme-brand-border, rgba(46, 125, 50, 0.35));
+    background: var(--theme-brand-muted, #e8f5e9);
+    color: var(--theme-brand, #2e7d32);
+}
+
+.header-ribbon.is-active {
+    background: var(--theme-brand, #2e7d32);
+    border-color: var(--theme-brand, #2e7d32);
+    color: var(--theme-on-brand, #ffffff);
+    box-shadow: 0 2px 8px var(--theme-brand-shadow, rgba(46, 125, 50, 0.22));
+}
+
+.header-ribbon.is-active:hover {
+    background: var(--theme-brand-hover, #1b5e20);
+    border-color: var(--theme-brand-hover, #1b5e20);
+    color: var(--theme-on-brand, #ffffff);
+}
+
+.header-ribbon-icon {
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.header-ribbon-label {
+    line-height: 1;
+}
+
+.header-ribbons-mobile-bar {
+    position: fixed;
+    top: calc(56px + env(safe-area-inset-top, 0px));
+    left: 0;
+    right: 0;
+    z-index: 998;
+    background: var(--theme-surface, #ffffff);
+    border-bottom: 1px solid var(--theme-border, #e8ecf1);
+    padding: 8px 10px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.header-ribbons--mobile {
+    flex: none;
+    width: 100%;
+}
+
+.header-ribbons--mobile .header-ribbon {
+    height: 32px;
+    padding: 0 12px 0 10px;
+    font-size: 0.72rem;
+}
+
+.header-ribbons--mobile .header-ribbon-icon {
+    font-size: 15px !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+@media (max-width: 980px) {
+    .header-ribbon-label {
+        display: none;
+    }
+
+    .header-ribbon {
+        width: 34px;
+        padding: 0;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-ribbon-label {
+        display: inline;
+    }
+
+    .header-ribbon {
+        width: auto;
+        padding: 0 12px 0 10px;
+        justify-content: flex-start;
+    }
+}
+
+.header-brand-refresh {
+    margin-left: 0 !important;
+    flex-shrink: 0 !important;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #475569 !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.header-brand-refresh:hover {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+.header-brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: rgba(46, 125, 50, 0.14);
+    color: var(--theme-brand);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.header-brand-text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.08;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+/* Stable “track” for typewriter — width reserved here, text clips inside */
+.header-brand-tagline-shell {
+    flex: 1 1 0;
+    min-width: 200px;
+    max-width: min(560px, 42vw);
+    min-height: 38px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.header-brand-tagline.MuiTypography-root {
+    margin: 0 !important;
+}
+
+.header-brand-tagline {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-align: left !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
+    color: #475569 !important;
+    line-height: 1.45 !important;
+}
+
+.header-brand-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    letter-spacing: -0.02em !important;
+}
+
+.header-brand-subtitle {
+    margin-top: 3px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+}
+
+.header-brand-typewriter {
+    box-sizing: border-box;
+}
+
+.header-brand-typewriter::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 0.88em;
+    margin-left: 4px;
+    vertical-align: -0.1em;
+    background: var(--theme-brand);
+    border-radius: 1px;
+    animation: header-brand-caret-blink 1s step-end infinite;
+}
+
+@keyframes header-brand-caret-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header-brand-typewriter::after {
+        animation: none;
+        opacity: 0.85;
+    }
+}
+
+/* Narrow desktop / compact header: shorten typewriter panel */
+.main-header.enhanced.compact-mode .header-brand-tagline-shell {
+    max-width: min(340px, 36vw) !important;
+}
+
+.main-header.enhanced.light-theme .header-breadcrumb {
+    margin-left: 2px !important;
+}
+
+/* Sidebar top should be utility-only after brand moved to header */
+.medicore-sidebar.hospital-theme .sidebar-header {
+    display: none !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-header .logo-section {
+    display: none !important;
+}
+
+.medicore-sidebar.hospital-theme.compact-mode .sidebar-header {
+    display: block !important;
+    padding: 8px !important;
+    min-height: 52px !important;
+}
+
+@media (max-width: 768px) {
+    .header-brand-toolbar {
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .header-brand {
+        min-width: 0;
+        padding: 4px 8px;
+    }
+
+    .header-brand-lockup {
+        padding: 4px 10px 4px 6px !important;
+        border-radius: 10px !important;
+    }
+
+    .header-brand-subtitle {
+        display: none;
+    }
+}
+
+.main-header.enhanced.light-theme .menu-trigger {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #475569 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+}
+
+.main-header.enhanced.light-theme .menu-trigger:hover {
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    border-color: #cbd5e1 !important;
+    transform: none !important;
+}
+
+.main-header.enhanced.light-theme .header-breadcrumb {
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    min-height: auto !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.main-header.enhanced.light-theme .page-title {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    letter-spacing: 0 !important;
+}
+
+.main-header.enhanced.light-theme .header-right-section {
+    gap: 8px !important;
+}
+
+.main-header.enhanced.light-theme .header-icon-button {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #475569 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.main-header.enhanced.light-theme .header-icon-button:hover {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    transform: none !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08) !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+    border: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+    color: #64748b !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced:hover {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    transform: none !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced .dropdown-arrow {
+    color: #64748b !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced:hover .dropdown-arrow {
+    color: #0f172a !important;
+}
+
+.main-content {
+    margin-left: 240px !important;
+    margin-top: 64px !important;
+    min-height: calc(100vh - 64px) !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-top: 0 !important;
+}
+
+.main-content.compact-mode {
+    margin-left: 76px !important;
+}
+
+.main-content.sidebar-hidden,
+.main-content.compact-mode.sidebar-hidden {
+    margin-left: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .main-header.enhanced.light-theme {
+        left: 0 !important;
+        padding: 0 10px !important;
+        height: 60px !important;
+    }
+
+    .main-header.enhanced.light-theme .page-title {
+        font-size: 15px !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        margin-top: 60px !important;
+        min-height: calc(100vh - 60px) !important;
+        padding-top: 0 !important;
+    }
+}
+
+/* ===== FINAL hospital lock (single source of truth) ===== */
+.main-header.enhanced.light-theme {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 64px !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
+    z-index: 1001 !important;
+}
+
+.medicore-sidebar.hospital-theme {
+    top: 64px !important;
+    left: 0 !important;
+    height: calc(100vh - 64px) !important;
+}
+
+.main-content {
+    margin-top: 64px !important;
+    margin-left: 240px !important;
+    min-height: calc(100vh - 64px) !important;
+    width: calc(100% - 240px) !important;
+    max-width: none !important;
+    background: #f8fafc !important;
+}
+
+.main-content.compact-mode {
+    margin-left: 76px !important;
+    width: calc(100% - 76px) !important;
+}
+
+.main-content.sidebar-hidden,
+.main-content.compact-mode.sidebar-hidden {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+.main-header.enhanced.light-theme .header-breadcrumb {
+    display: flex !important;
+    align-items: center !important;
+    border: 1px solid rgba(148, 163, 184, 0.26) !important;
+    border-radius: 14px !important;
+    padding: 8px 12px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.84)) !important;
+    backdrop-filter: blur(8px) !important;
+    box-shadow: 0 5px 16px rgba(15, 23, 42, 0.05) !important;
+    min-height: 40px !important;
+}
+
+.main-header.enhanced.light-theme .breadcrumb-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1px !important;
+    min-width: 0 !important;
+}
+
+.main-header.enhanced.light-theme .page-title {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    line-height: 1.2 !important;
+}
+
+.page-path {
+    margin-top: 2px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+    line-height: 1.1 !important;
+}
+
+/* Slim hospital scrollbar */
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar {
+    width: var(--sidebar-scrollbar-width) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb {
+    background: var(--theme-brand) !important;
+    border-radius: 3px !important;
+}
+
+@media (max-width: 768px) {
+    .main-header.enhanced.light-theme {
+        height: 60px !important;
+    }
+
+    .header-brand {
+        min-width: 0;
+        padding: 6px 8px;
+        gap: 8px;
+    }
+
+    .header-brand-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+    }
+
+    .medicore-sidebar.hospital-theme {
+        top: 0 !important;
+        height: 100vh !important;
+    }
+
+    .main-content,
+    .main-content.compact-mode,
+    .main-content.sidebar-hidden,
+    .main-content.compact-mode.sidebar-hidden {
+        margin-top: 60px !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+        min-height: calc(100vh - 60px) !important;
+        padding-bottom: 16px !important;
+    }
+}
+
+/* ===== Header/compact stability fix ===== */
+.main-header,
+.main-header.enhanced,
+.main-header.sidebar-hidden,
+.main-header.compact-mode,
+.main-header.compact-mode.sidebar-hidden,
+.main-header.enhanced.light-theme,
+.main-header.enhanced.light-theme.sidebar-hidden,
+.main-header.enhanced.light-theme.compact-mode,
+.main-header.enhanced.light-theme.compact-mode.sidebar-hidden {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+}
+
+/* Hospital shell: keep header transitions off (full-width bar); animate sidebar + content below */
+.main-header.enhanced.light-theme {
+    transition-property: none !important;
+}
+
+/* Keep content stable when toggling compact/full on desktop */
+.main-content,
+.main-content.compact-mode,
+.main-content.sidebar-hidden,
+.main-content.compact-mode.sidebar-hidden {
+    margin-top: 64px !important;
+}
+
+/* Mobile bottom app-style navigation */
+.mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1100;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.74), rgba(255, 255, 255, 0.9));
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(10px);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mobile-bottom-nav-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 10px 12px;
+    scrollbar-width: none;
+}
+
+.mobile-bottom-nav-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-bottom-tab {
+    border: 0;
+    background: rgba(255, 255, 255, 0.55);
+    min-width: 86px;
+    height: 52px;
+    border-radius: 14px;
+    color: #5b6b82;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(203, 213, 225, 0.7);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.mobile-bottom-tab.active {
+    background: linear-gradient(135deg, var(--theme-brand-muted), var(--theme-brand-surface));
+    color: var(--theme-brand);
+    font-weight: 600;
+    border-color: var(--theme-brand-border);
+    box-shadow: 0 8px 18px var(--theme-brand-shadow);
+}
+
+.mobile-bottom-tab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.mobile-bottom-tab-label {
+    font-size: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+/* Mobile bottom sheet */
+.mobile-sheet-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    background: rgba(15, 23, 42, 0.35);
+    display: flex;
+    align-items: flex-end;
+}
+
+.mobile-sheet {
+    width: 100%;
+    max-height: 62vh;
+    background: #ffffff;
+    border-radius: 16px 16px 0 0;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.mobile-sheet-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobile-sheet-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--theme-brand-surface);
+    color: var(--theme-brand);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-sheet-title {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.mobile-sheet-subtitle {
+    font-size: 11px !important;
+    color: #64748b !important;
+}
+
+.mobile-sheet-list {
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.mobile-sheet-item {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.mobile-sheet-item.active {
+    background: var(--theme-brand-muted);
+    color: var(--theme-brand);
+    font-weight: 600;
+}
+
+/* ===== Palette Preview Overrides ===== */
+.main-header.enhanced.light-theme {
+    background: var(--theme-surface) !important;
+    border-bottom-color: var(--theme-border) !important;
+}
+
+.main-content {
+    background: var(--theme-bg) !important;
+}
+
+.header-brand-title,
+.main-header.enhanced.light-theme .page-title,
+.mobile-sheet-title {
+    color: var(--theme-text) !important;
+}
+
+.header-brand-subtitle,
+.page-path,
+.mobile-sheet-subtitle,
+.mobile-bottom-tab,
+.mobile-bottom-tab-label {
+    color: var(--theme-text-muted) !important;
+}
+
+.header-brand-refresh {
+    border-color: var(--theme-border-strong) !important;
+    color: var(--theme-text-soft) !important;
+}
+
+.mobile-bottom-nav {
+    background: linear-gradient(180deg, rgba(250, 250, 250, 0.78), rgba(255, 255, 255, 0.96)) !important;
+    border-top-color: var(--theme-border) !important;
+}
+
+.mobile-bottom-tab {
+    border-color: var(--theme-border-strong) !important;
+}
+
+.mobile-bottom-tab.active {
+    background: linear-gradient(135deg, var(--theme-brand-muted), var(--theme-brand-surface)) !important;
+    color: var(--theme-brand) !important;
+    border-color: rgba(46, 125, 50, 0.35) !important;
+    box-shadow: 0 8px 18px var(--theme-brand-shadow) !important;
+}
+
+.mobile-sheet-icon {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+}
+
+.mobile-sheet-item {
+    color: var(--theme-text-soft) !important;
+}
+
+.mobile-sheet-item.active {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+}
+
+/* Strong visible theme lock for quick preview */
+.medicore-sidebar.hospital-theme {
+    background: var(--theme-surface) !important;
+    border-right: 1px solid var(--theme-border) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] {
+    background: var(--theme-brand-muted) !important;
+    border-left-color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"] .MuiSvgIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.header-brand-icon {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+}
+
+.content-body {
+    padding: 0 8px 8px;
+}
+
+/* Final no-green cleanup overrides */
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.Mui-selected,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root[aria-expanded="true"],
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.active,
+.mobile-sheet-item.active {
+    background: var(--theme-brand-muted) !important;
+    color: var(--theme-brand) !important;
+    border-left-color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root[aria-expanded="true"] .MuiTypography-root,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root[aria-expanded="true"] .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.active .MuiTypography-root,
+.medicore-sidebar.hospital-theme .MuiListItemButton-root.active .MuiSvgIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu,
+.medicore-sidebar.hospital-theme .nav-menu * {
+    scrollbar-color: var(--theme-brand) #ECECEC !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb,
+.hover-menu.scrollable::-webkit-scrollbar-thumb,
+.hover-submenu.scrollable::-webkit-scrollbar-thumb {
+    background: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover,
+.hover-menu.scrollable::-webkit-scrollbar-thumb:hover,
+.hover-submenu.scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-brand-hover) !important;
+}
+
+.action-button-badge,
+.header-notification-badge,
+.notification-badge {
+    background: var(--theme-brand) !important;
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+}
+
+/* Remove leftover green/blue outlines and submenu rail */
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root:focus-visible {
+    outline: 2px solid rgba(46, 125, 50, 0.45) !important;
+    outline-offset: 2px !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root::before {
+    background: linear-gradient(
+        to bottom,
+        rgba(46, 125, 50, 0.38) 0%,
+        rgba(46, 125, 50, 0.24) 55%,
+        rgba(46, 125, 50, 0.08) 100%
+    ) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected,
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.active {
+    border-left: 3px solid var(--theme-brand-muted-strong) !important;
+    background: var(--theme-brand-muted-strong) !important;
+}
+
+/* Match selected inner item style to provided sample */
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.Mui-selected,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root.active,
+.medicore-sidebar.hospital-theme .nav-menu .MuiListItemButton-root[aria-expanded="true"],
+.mobile-sheet-item.active,
+.mobile-bottom-tab.active {
+    background: var(--theme-brand-muted-strong) !important;
+    color: var(--theme-brand) !important;
+    border-left-color: var(--theme-brand-muted-strong) !important;
+    border-color: rgba(46, 125, 50, 0.2) !important;
+}
+
+/* Final hard overrides for remaining green accents */
+.medicore-sidebar.hospital-theme .sidebar-footer .action-button .action-button-badge {
+    background: var(--theme-brand) !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.active .MuiTypography-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root,
+.medicore-sidebar.hospital-theme .nav-menu .MuiCollapse-root .MuiListItemButton-root.active .MuiSvgIcon-root {
+    color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb {
+    background: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover {
+    background: var(--theme-brand-hover) !important;
+}
+
+/* Force mode switch to neutral black/white */
+.medicore-sidebar.hospital-theme .sidebar-mode-switch {
+    background: #DDE3EC !important;
+    border: 1px solid #C9D2DE !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-mode-option {
+    color: #1F2937 !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-mode-option:hover {
+    color: #111111 !important;
+}
+
+.medicore-sidebar.hospital-theme .sidebar-mode-option.active {
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    border-color: #FFFFFF !important;
+}
+
+/* Header + user dropdown enhancement */
+.main-header.enhanced.light-theme .header-user-actions-cluster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-header.enhanced.light-theme .header-icon-button.soft {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--theme-brand-muted) !important;
+    border: 1px solid var(--theme-brand-muted-strong);
+    color: var(--theme-brand) !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced.pill {
+    min-width: 92px;
+    height: 38px;
+    border-radius: 22px;
+    padding: 0 10px 0 6px;
+    background: #1F2937 !important;
+    color: #FFFFFF !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0 !important;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced.pill .header-pill-avatar {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--theme-brand);
+    color: #ffffff;
+}
+
+.main-header.enhanced.light-theme .header-profile.enhanced.pill .dropdown-arrow {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.user-dropdown-menu {
+    background: #FFFFFF !important;
+    border: 1px solid #E6E9F0 !important;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16) !important;
+    overflow: hidden;
+}
+
+.user-menu-shell {
+    padding: 14px;
+}
+
+/* Single profile strip — no duplicate header bell / settings pills */
+.user-menu-profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.user-menu-profile-avatar {
+    width: 46px !important;
+    height: 46px !important;
+    flex-shrink: 0;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    background: var(--theme-brand) !important;
+    color: #ffffff !important;
+}
+
+.user-menu-profile-text {
+    min-width: 0;
+    flex: 1;
+    padding-top: 2px;
+}
+
+.user-menu-profile-kicker {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #94a3b8 !important;
+    line-height: 1.2 !important;
+}
+
+.user-menu-profile-name {
+    margin-top: 4px !important;
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+}
+
+.user-menu-profile-role {
+    margin-top: 4px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+}
+
+.user-menu-search {
+    height: 44px;
+    border: 1px solid #D7DEE8;
+    border-radius: 8px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #94A3B8;
+    background: #FFFFFF;
+}
+
+.user-menu-search .MuiInputBase-root {
+    flex: 1;
+    font-size: 14px;
+    color: #334155;
+}
+
+.user-menu-upgrade-card {
+    margin-top: 14px;
+    border-radius: 10px;
+    background: #F7F1DA;
+    padding: 14px;
+}
+
+.user-menu-upgrade-card .upgrade-title {
+    font-size: 30px;
+    line-height: 1;
+    font-weight: 700;
+    color: #111827;
+}
+
+.user-menu-upgrade-card .upgrade-subtitle {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #4B5563;
+    line-height: 1.45;
+}
+
+.user-menu-note-meta {
+    margin-top: 10px !important;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: var(--theme-brand-muted-strong);
+    color: #1F2937;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    padding: 5px 10px;
+}
+
+.user-menu-toggle-card {
+    margin-top: 12px;
+    border-radius: 8px;
+    background: var(--theme-brand-muted);
+    padding: 10px 12px;
+}
+
+.user-menu-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #0F172A;
+}
+
+.user-menu-toggle-row + .user-menu-toggle-row {
+    margin-top: 8px;
+}
+
+.user-menu-toggle-card .MuiSwitch-switchBase.Mui-checked {
+    color: var(--theme-brand) !important;
+}
+
+.user-menu-toggle-card .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+    background-color: var(--theme-brand) !important;
+    opacity: 1 !important;
+}
+
+.user-menu-toggle-card .MuiSwitch-track {
+    background-color: #A8B3C2 !important;
+    opacity: 1 !important;
+}
+
+.user-menu-links {
+    margin-top: 12px;
+    border-top: 1px solid #E5E7EB;
+    padding-top: 8px;
+}
+
+.user-menu-link-btn {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    border-radius: 8px;
+    padding: 10px 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1F2937;
+    cursor: pointer;
+    text-align: left;
+}
+
+.user-menu-link-btn:hover {
+    background: #F5F7FA;
+}
+
+.user-menu-link-btn .user-menu-link-badge {
+    margin-left: auto;
+    min-width: 28px;
+    height: 24px;
+    border-radius: 12px;
+    background: var(--theme-brand-muted-strong);
+    color: #1F2937;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.user-menu-link-btn.danger {
+    color: #334155;
+}
+
+.user-menu-link-btn.locked {
+    color: #6B7280;
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.user-menu-link-btn.locked:hover {
+    background: transparent;
+}
+
+/* -------- Soft sidebar (Humaplus-like gray chrome) -------- */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme {
+    background:
+        linear-gradient(180deg, rgba(240, 249, 248, 0.95) 0%, rgba(249, 250, 251, 1) 42%, #f7f8fa 100%) !important;
+    border-right: 1px solid #e5e7eb !important;
+    box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-header {
+    background: transparent !important;
+    border-bottom-color: rgba(229, 231, 235, 0.9) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-brand-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    color: #fff;
+    background: linear-gradient(145deg, var(--theme-brand) 0%, var(--theme-brand-hover, #1B5E20) 100%);
+    box-shadow:
+        0 6px 14px rgba(0, 95, 86, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-brand-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: #111c2d;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-brand-subtitle {
+    margin-top: 2px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-chrome-btn {
+    border-radius: 10px !important;
+    border: 1px solid #e5e7eb !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    color: #64748b !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-chrome-btn:hover {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: #d1d5db !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-section {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.85) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-wrapper {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-wrapper:focus-within {
+    background: #ffffff !important;
+    border-color: var(--theme-brand) !important;
+    box-shadow: 0 0 0 3px rgba(0, 95, 86, 0.14) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-input {
+    color: #334155 !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-input::placeholder {
+    color: #9ca3af !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-icon,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-clear-btn {
+    color: #9ca3af !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu {
+    background: transparent !important;
+    scrollbar-color: var(--theme-brand) #ececec !important;
+    /* Light zone line under search + slightly roomier horizontal inset */
+    padding: 12px 8px 16px !important;
+    border-top: none !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .search-section {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-thumb {
+    background-color: var(--theme-brand) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover {
+    background-color: var(--theme-brand-hover) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-footer {
+    background: linear-gradient(180deg, rgba(249, 250, 251, 0) 0%, rgba(240, 249, 248, 0.9) 35%, #f0f9f8 100%) !important;
+    border-top-color: #e5e7eb !important;
+    padding: 12px 10px 14px !important;
+}
+
+/* Sidebar profile card (opens account menu) */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    border: 1px solid rgba(229, 231, 235, 0.95) !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    font-family: inherit !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-card:hover {
+    background: #ffffff !important;
+    border-color: #d1d5db !important;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-card:focus-visible {
+    outline: 2px solid rgba(0, 95, 86, 0.35) !important;
+    outline-offset: 2px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-avatar {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex-shrink: 0 !important;
+    border-radius: 12px !important;
+    background: linear-gradient(145deg, var(--theme-brand) 0%, var(--theme-brand-hover, #1B5E20) 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 95, 86, 0.2) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-status {
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-name {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    color: #0f172a !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-role {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    color: #64748b !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-caret {
+    flex-shrink: 0 !important;
+    color: #94a3b8 !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-card--compact {
+    justify-content: center !important;
+    padding: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-soft-user-card--compact .sidebar-soft-user-avatar {
+    width: 38px !important;
+    height: 38px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-mode-switch {
+    background: rgba(229, 231, 235, 0.85) !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 10px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-mode-option {
+    color: #4b5563 !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-mode-option:hover {
+    color: #111827 !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .sidebar-mode-option.active {
+    background: #ffffff !important;
+    color: var(--theme-brand) !important;
+    border-color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* Richer parent/active nav affordance — clear hierarchy */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent {
+    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent:hover {
+    background: rgba(255, 255, 255, 0.72) !important;
+}
+
+/* Parent with active child: soft white, not mint fill */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-green-50,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-white\/70,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-white\/80,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent[aria-expanded="true"] {
+    background: rgba(255, 255, 255, 0.72) !important;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
+    color: #1e293b !important;
+}
+
+/* Tailwind sidebar nav: strip native chrome; keep submenu borders free for active accent */
+.medicore-sidebar.sidebar-soft-ui .nav-menu .sidebar-nav-tw button {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: none;
+}
+
+.medicore-sidebar.sidebar-soft-ui .nav-menu .sidebar-nav-tw button.sidebar-nav-parent {
+    border-width: 0 !important;
+}
+
+/* Submenu rows: reserved left rail + radius so brand accent stays visible (parent rows zero borders above) */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child {
+    font-size: 13px !important; /* slight step up from 12px; parent stays text-sm ~14px */
+    line-height: 1.42 !important;
+    border-radius: 7px !important;
+    border-style: solid !important;
+    border-top-width: 0 !important;
+    border-right-width: 0 !important;
+    border-bottom-width: 0 !important;
+    border-left-width: 4px !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child:not(.sidebar-submenu-active) {
+    border-left-color: transparent !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child:not(.sidebar-submenu-active):hover {
+    border-left-color: rgba(129, 199, 132, 0.85) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.sidebar-submenu-active {
+    border-left-color: var(--theme-brand) !important;
+}
+
+.sidebar-submenu-flyout button.nav-submenu-child {
+    font-size: 13px !important;
+    line-height: 1.42 !important;
+    border-radius: 8px !important;
+    border-style: solid !important;
+    border-top-width: 0 !important;
+    border-right-width: 0 !important;
+    border-bottom-width: 0 !important;
+    border-left-width: 4px !important;
+}
+
+.sidebar-submenu-flyout button.nav-submenu-child:not(.sidebar-submenu-active) {
+    border-left-color: transparent !important;
+}
+
+.sidebar-submenu-flyout button.nav-submenu-child:not(.sidebar-submenu-active):hover {
+    border-left-color: rgba(129, 199, 132, 0.85) !important;
+}
+
+.sidebar-submenu-flyout button.nav-submenu-child.sidebar-submenu-active {
+    border-left-color: var(--theme-brand) !important;
+}
+
+/* Parent section rows — half-step above submenu (13px), slightly larger radius than children */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent {
+    font-size: 13.5px !important;
+    line-height: 1.39 !important;
+    border-radius: 8px !important;
+}
+
+/* Compact rail tooltip — matches soft sidebar / brand */
+.sidebar-shell-soft .nav-tooltip {
+    background: var(--theme-brand) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 7px 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
+    box-shadow: 0 6px 20px var(--theme-brand-shadow) !important;
+}
+
+/* School palette — parent stays soft; selected child uses white + brand rail */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-green-50,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-white\/70,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.sidebar-nav-parent.bg-white\/80 {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.sidebar-submenu-active,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.bg-green-50,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.bg-green-100,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.bg-white {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child.sidebar-submenu-active {
+    border-left-color: var(--theme-brand) !important;
+}
+
+.sidebar-submenu-flyout button.nav-submenu-child.sidebar-submenu-active {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-left-color: var(--theme-brand) !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-tw button.nav-submenu-child:not(.sidebar-submenu-active):hover {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    border-left-color: rgba(0, 95, 86, 0.35) !important;
+}
+
+/* Slim sidebar nav scrollbar (soft UI) — single scroll on .nav-menu only */
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--theme-brand) transparent !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll::-webkit-scrollbar {
+    width: var(--sidebar-scrollbar-width) !important;
+    height: var(--sidebar-scrollbar-width) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-button,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll::-webkit-scrollbar-button,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-button:single-button,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-button:vertical:start:decrement,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-button:vertical:end:increment {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-track,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-thumb,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--theme-brand) !important;
+    border-radius: 3px !important;
+    min-height: 24px;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu::-webkit-scrollbar-thumb:hover,
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--theme-brand-hover) !important;
+}
+
+.medicore-sidebar.sidebar-soft-ui.hospital-theme .nav-menu .sidebar-nav-scroll {
+    overflow: visible !important;
+}
+
+/* AdminSalesDashboard.jsx — narrow ranking columns need slim scrollbars (WebKit) */
+.admin-sales-dash-rank-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.admin-sales-dash-rank-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(148, 163, 184, 0.55);
+    border-radius: 9999px;
+}
+.admin-sales-dash-rank-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ===== Mobile header — compact professional app bar ===== */
+@media (max-width: 768px) {
+    .main-header.enhanced.mobile {
+        height: calc(56px + env(safe-area-inset-top, 0px)) !important;
+        min-height: 56px;
+        padding: env(safe-area-inset-top, 0px) 10px 0 10px !important;
+        gap: 8px;
+        box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08) !important;
+        border-bottom: 1px solid var(--theme-border, #e8ecf1) !important;
+        background: var(--theme-surface, #ffffff) !important;
+    }
+
+    .main-header.enhanced.mobile .header-left-section {
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: none !important;
+        gap: 8px !important;
+        overflow: hidden;
+    }
+
+    .main-header.enhanced.mobile .header-right-section {
+        flex: 0 0 auto;
+        max-width: none !important;
+        gap: 6px !important;
+    }
+
+    .main-header.enhanced.mobile .header-brand-toolbar {
+        min-width: 0;
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+
+    .main-header.enhanced.mobile .header-brand-lockup.header-brand-text-only {
+        padding: 6px 12px !important;
+    }
+
+    .main-header.enhanced.mobile .header-brand-title {
+        font-size: 0.84rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.06em !important;
+    }
+
+    .main-header.enhanced.mobile .header-menu-slot {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    .main-header.enhanced.mobile .menu-trigger {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 11px !important;
+    }
+
+    .main-header.enhanced.mobile .header-user-actions-cluster {
+        gap: 6px !important;
+        flex-shrink: 0;
+    }
+
+    /* Refresh — primary mobile action */
+    .main-header.enhanced.mobile .header-mobile-refresh-btn {
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(46, 125, 50, 0.28) !important;
+        background: linear-gradient(180deg, var(--theme-brand-muted, #e8f5e9) 0%, #f4fbf5 100%) !important;
+        color: var(--theme-brand, #2e7d32) !important;
+        box-shadow: 0 1px 3px rgba(46, 125, 50, 0.12) !important;
+        flex-shrink: 0;
+    }
+
+    .main-header.enhanced.mobile .header-mobile-refresh-btn:hover,
+    .main-header.enhanced.mobile .header-mobile-refresh-btn:active {
+        background: var(--theme-brand-muted, #e8f5e9) !important;
+        border-color: var(--theme-brand, #2e7d32) !important;
+        color: var(--theme-brand-hover, #1b5e20) !important;
+    }
+
+    .main-header.enhanced.mobile .header-icon-button.soft {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 11px !important;
+        flex-shrink: 0;
+    }
+
+    .main-header.enhanced.mobile .header-profile.enhanced.pill.mobile-compact {
+        min-width: 0;
+        width: auto;
+        height: 40px;
+        padding: 0 8px 0 4px;
+        border-radius: 20px !important;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+    .main-header.enhanced.mobile .header-profile.enhanced.pill.mobile-compact .header-pill-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .main-header.enhanced.mobile .header-profile.enhanced.pill.mobile-compact .dropdown-arrow.mobile-only {
+        color: rgba(255, 255, 255, 0.9) !important;
+        margin-left: -2px;
+    }
+
+    .main-content.mobile {
+        margin-top: calc(56px + 48px + env(safe-area-inset-top, 0px)) !important;
+        min-height: calc(100vh - 56px - 48px - env(safe-area-inset-top, 0px)) !important;
+        padding-top: 0 !important;
+    }
+
+    .medicore-sidebar.hospital-theme {
+        top: calc(56px + env(safe-area-inset-top, 0px)) !important;
+        height: calc(100vh - 56px - env(safe-area-inset-top, 0px)) !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-header.enhanced.mobile {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .main-header.enhanced.mobile .header-brand-lockup {
+        padding-right: 8px !important;
+    }
+
+    .main-header.enhanced.mobile .header-brand-title {
+        font-size: 0.82rem !important;
+    }
+
+    .main-header.enhanced.mobile .header-mobile-refresh-btn,
+    .main-header.enhanced.mobile .header-icon-button.soft {
+        width: 38px !important;
+        height: 38px !important;
+    }
+}
